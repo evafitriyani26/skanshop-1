@@ -1,5 +1,12 @@
 <?php
 
+ //koneksi Database
+ $server= "localhost";
+ $userDB= "root";
+ $pass= "";
+ $database= "skanshop";
+
+ $koneksi= mysqli_connect($server, $userDB, $pass, $database)or die(mysqli_error($koneksi));
 session_start();
 if(empty($_SESSION['user'])) {
   header("location: index.php?status=gagal");
@@ -7,6 +14,18 @@ if(empty($_SESSION['user'])) {
   $user = $_SESSION['user'];
 }
 
+ $sql =" SELECT * FROM produk ";
+ $result = $koneksi->query($sql);
+ $produks = array();
+  if($koneksi->query($sql)) { 
+    while($row = $result->fetch_assoc()) {
+      $produks[] = $row;
+    }
+  } else {
+    echo "Query error";
+    exit;
+  }
+  
 ?>
 
 <!doctype html>
@@ -68,30 +87,12 @@ if(empty($_SESSION['user'])) {
     <h6 class="text-ligh">List Produk</h6>
     <div class="card-body">
       <div class="row">
+      <?php foreach($produks as $produk) { ?>
         <div class="col-4 text-center">
-          <a href="produk1.html"><img src="hotdog 2.png" width="100">
-          <p style="font-size: 15px;">Nama Barang</p></a>
+          <a href="produk.php?id=<?php echo $produk['id']; ?>"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
+          <p style="font-size: 15px;"><?php echo $produk['nama_produk']; ?></p></a>
         </div>
-        <div class="col-4 text-center">
-          <a href="produk.html"><img src="baju2.png" width="100">
-          <p style="font-size: 15px;">Nama Barang</p></a>
-        </div>
-        <div class="col-4 text-center">
-          <a href=""><img src="cake.png" width="100">
-          <p style="font-size: 15px;">Nama Barang</p></a>
-        </div>
-        <div class="col-4 text-center">
-          <a href=""><img src="snack 4.png" width="100">
-          <p style="font-size: 15px;">Nama Barang</p></a>
-        </div>
-        <div class="col-4 text-center">
-          <a href=""><img src="breakfast 2.png" width="100">
-          <p style="font-size: 15px;">Nama Barang</p></a>
-        </div>
-        <div class="col-4 text-center">
-          <a href=""><img src="snack 3.png" width="100">
-          <p style="font-size: 15px;">Nama Barang</p></a>
-        </div>
+        <?Php } ?>
       </div>
       </div>
       </div>
