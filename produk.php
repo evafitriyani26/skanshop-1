@@ -30,7 +30,7 @@ $produk =  $result->fetch_assoc();
 <html lang="en">
   <head>
     <style>
-      body {width: 200vh; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
+      body {width: 100vmax; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
       
     </style>
     <!-- Required meta tags -->
