@@ -1,10 +1,36 @@
+<?php
 
+ //koneksi Database
+ $server= "localhost";
+ $userDB= "root";
+ $pass= "";
+ $database= "skanshop";
+
+ $koneksi= mysqli_connect($server, $userDB, $pass, $database)or die(mysqli_error($koneksi));
+session_start();
+if(empty($_SESSION['user'])) {
+  header("location: index.php?status=gagal");
+}else{
+  $user = $_SESSION['user'];
+}
+
+if(isset($_GET['id']) && $_GET['id']) {
+  $idproduct = $_GET['id'];
+} else {
+  echo "ID produk belum dipilih";
+  exit;
+}
+ 
+$sql =" SELECT * FROM produk WHERE id='$idproduct' ";
+$result = $koneksi->query($sql);
+$produk =  $result->fetch_assoc();
+?>
 
 <!doctype html>
 <html lang="en">
   <head>
     <style>
-      body {height: 200vh; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
+      body {width: 200vh; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
       
     </style>
     <!-- Required meta tags -->
@@ -27,16 +53,23 @@
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="snack 3.png" class="d-blok w-100" alt="...">
-            </div>
-           
+        <div class="col-12 text-center">
+          <img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
+          <p style="font-size: 15px;"><?php echo $produk['nama_produk']; ?></p>
+          <p style="font-size: 15px;">
+        </div>
+      
           </div>
         </div>
     </div>
-    <div class="card text-center" style="width: 22">
+    <div class="card text-center " style="width: 22">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">NAMA PRODUK</li>
-        <li class="list-group-item">HARGA PRODUK</li>
+        <li class="list-group-item ">NAMA PRODUK</p><?php echo $produk['nama_produk']; ?></li>
+            </ul>
+            </div>
+        <div class="card text-center mt-3" style="width: 22">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" >HARGA PRODUK</p><?php echo $produk['harga_produk']; ?></li>
       </ul>
     </div>
     </div>
@@ -64,7 +97,7 @@
         Deskripsi Item
         </p>
         <p class="lead">
-         
+        <?php echo $produk['deskripsi']; ?>
           </p>
         
             </div>
@@ -73,7 +106,7 @@
     </div>
     <div id="kandang" class="container">
       <div id="tombol-bawah" class="d-flex justify-content-around">
-      <button class="btn btn-outline-width" type="submit"><i class="bi bi-whatsapp"></i> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"></i></button>
+      <button class="btn btn-outline-width" type="submit"><i class="bi bi-whatsapp"><?php echo $user['wa']; ?></i> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"></i></button>
       <button class="btn btn-outline-width" type="submit"><i class="bi bi-facebook"></i> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"></i></button>
       <button class="btn btn-outline-width" type="submit"><i class="bi bi-instagram"></i> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"></i></button>
       </div>

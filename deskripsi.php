@@ -1,12 +1,16 @@
 <?php
     //koneksi Database
     $server= "localhost";
-    $user= "root";
+    $userDB= "root";
     $pass= "";
     $database= "skanshop";
 
-    $koneksi= mysqli_connect($server, $user, $pass, $database)or die(mysqli_error($koneksi));
-
+    $koneksi= mysqli_connect($server, $userDB, $pass, $database)or die(mysqli_error($koneksi));
+    if(empty($_SESSION['user'])) {
+      header("location: index.php?status=gagal");
+    }else{
+      $user = $_SESSION['user'];
+    }
 
 //jika tombol simpan di klik
 //print_r($_POST);exit
@@ -22,12 +26,15 @@ if(isset($_POST['bsimpan']))
     }
        
             
-                $simpan = mysqli_query($koneksi, "INSERT INTO produk (`foto`,`nama_produk`,`harga_produk`,`kategori`,`deskripsi`)
+                $simpan = mysqli_query($koneksi, "INSERT INTO produk 
+                (`foto`,`nama_produk`,`harga_produk`,`kategori`,`deskripsi`, `id_user`)
                                           VALUES ('$namafoto',
                                                  '$_POST[nama_produk]',
                                                  '$_POST[harga_produk]',
                                                  '$_POST[kategori]',
-                                                 '$_POST[deskripsi]')
+                                                 '$_POST[deskripsi]',
+                                                 '$user[id]'
+                                                 )
                                          ");
 
                                          
