@@ -1,0 +1,41 @@
+.container {
+    width: 360px;
+    background-color: rgba(255, 255, 255, 0);
+    margin-top: 3px;
+    object-position: 0%;
+}
+#satu{
+    width: 360px;
+    height: 100px;
+    padding: 5px ;
+    background-color: rgb(219, 219, 219);
+    margin-top: 5px;
+}
+#colom{
+    padding: 10px ;
+    background-color: rgba(219, 219, 219);
+    margin-top: 10px;
+}
+#arrow{
+   color: black;
+    
+}
+#head{
+    padding-bottom: 0px;
+    background-color: transparent;
+    width: 360px;
+}
+#produk{
+    background-color: transparent;
+    padding-top: 0px;
+}
+#tombol-bawah{
+    position: fixed;
+    background-color: white;
+    bottom: 0px;
+    width: 360px;
+}
+#kandang{
+    position: relative;
+    height: 40px;;
+}
