@@ -6,16 +6,13 @@
     $database= "skanshop";
 
     $koneksi= mysqli_connect($server, $userDB, $pass, $database)or die(mysqli_error($koneksi));
-    if(empty($_SESSION['user'])) {
-      header("location: index.php?status=gagal");
-    }else{
-      $user = $_SESSION['user'];
-    }
-
-//jika tombol simpan di klik
-//print_r($_POST);exit
-if(isset($_POST['bsimpan']))
-{
+   
+    //jika tombol simpan di klik
+   //print_r($_POST);exit
+   if(isset($_POST['bsimpan']))
+   {
+    if($_GET['hal'] == "edit")
+    {
     //pengujian apakah data akan diedit atau disimpan baru
     
     $lokasifoto='image/';
@@ -53,26 +50,8 @@ if(isset($_POST['bsimpan']))
                             </script>";
                 }
         } 
-       
-        if(isset($_GET['id']))
-        {
-            //Pengujian jika data edit
-            if($_GET['id'] == "")
-            {
-                $tampil = mysqli_query($koneksi, "SELECT * FROM produk WHERE id = '$_GET[id]' ");
-                $data = mysqli_fetch_array($tampil);
-                if($data)
-                {
-                    //Jika data ditemukan, maka data ditampung ke dalam variabel
-                    $vfoto = $data['foto'];
-                    $vnamaproduk = $data['nama_produk'];
-                    $vhargaproduk = $data['harga_produk'];
-                    $vkategori = $data['kategori'];
-                    $vdeskripsi = $data['deskripsi'];    
-           
-                }
-              }
-            }
+        
+    //pengujian jika edit Data
 
 
 
