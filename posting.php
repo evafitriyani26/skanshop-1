@@ -19,35 +19,66 @@ if(isset($_POST['bsimpan']))
       $namafoto=@$_FILES['tfoto']['name'];
       move_uploaded_file($_FILES['tfoto']['tmp_name'],$lokasifoto.$namafoto);
     }
-    
-        $simpan = mysqli_query($koneksi, "INSERT INTO produk (`foto`,`nama_produk`,`harga_produk`,`kategori`,`deskripsi`)
-                                          VALUES ('$namafoto',
-                                                 '$_POST[nama_produk]',
-                                                 '$_POST[harga_produk]',
-                                                 '$_POST[kategori]',
-                                                 '$_POST[deskripsi]')
-                                         ");
-                     
-                    if($simpan)//Jika simpan suksess
-                    {
-                        echo "<script>
-                                alert('Simpan data suksess!');
-                                document.location='home.php';
-                            </script>";
-                    }
-                    else
-                    {
-                        echo "<script>
-                                alert('Simpan data GAGAL!!');
-                                document.location='posting.php';
-                            </script>";
-                }            
-} 
-if(isset($_GET['id']))
-{
-    //Pengujian jika data edit
-    if($_GET['id'] == "")
+    //jika edit
+    if($_GET['hal'] == "edit")
     {
+     //data akan diedit
+     $edit= mysqli_query($koneksi, "UPDATE produk set
+                 `foto`='".$namafoto."',
+                `nama_produk`='".$_POST['nama_produk']."',
+                `harga_produk`='".$_POST['harga_produk']."',
+                `kategori`='".$_POST['kategori']."',
+                `deskripsi`='".$_POST['deskripai']."',
+                 WHERE id='".$_GET['id']."'
+     ");
+
+     if($edit) //jika edit sukses
+     {
+     echo "<script>
+     alert('Edit data sukses!');
+     document.location='produk.php';
+     </script>";
+     }
+     else
+     {
+     echo "<script>
+     alert('Edit data GAGAL!!');
+     document.location='produk.php';
+     </script>";
+     
+     }
+            
+    }
+    else{
+    }
+    $simpan = mysqli_query($koneksi, "INSERT INTO produk (`foto`,`nama_produk`,`harga_produk`,`kategori`,`deskripsi`)
+    VALUES ('$namafoto',
+           '$_POST[nama_produk]',
+           '$_POST[harga_produk]',
+           '$_POST[kategori]',
+           '$_POST[deskripsi]')
+   ");
+
+if($simpan)//Jika simpan suksess
+{
+echo "<script>
+alert('Simpan data suksess!');
+document.location='home.php';
+</script>";
+}
+else
+{
+echo "<script>
+alert('Simpan data GAGAL!!');
+document.location='posting.php';
+</script>";
+}       
+
+if(isset($_GET['hal']))
+{
+   //pengujian jika edit Data
+   if($_GET['hal']== "edit")
+   {
         $tampil = mysqli_query($koneksi, "SELECT * FROM produk WHERE id = '$_GET[id]' ");
         $data = mysqli_fetch_array($tampil);
         if($data)
@@ -59,7 +90,8 @@ if(isset($_GET['id']))
             $vkategori = $data['kategori'];
             $vdeskripsi = $data['deskripsi'];    
         
-        }else if ($_GET['hal'] == "hapus")
+        }
+        else if ($_GET['hal'] == "hapus")
         {
             //Persiapan hapus data
             $hapus = mysqli_query($koneksi, "DELETE FROM produk WHERE id = '$_GET[id]' ");
@@ -72,6 +104,22 @@ if(isset($_GET['id']))
         }
     }
 }    
+}
+
+
+    //tampilkan data yang akan diedit
+    $tampil = mysqli_query($koneksi, "SELECT * FROM produk WHERE id = '$_GET[id]' ");
+    $data = mysqli_fetch_array($tampil); 
+    if($data)
+    {
+                  //Jika data ditemukan, maka data ditampung ke dalam variabel
+                  $vfoto = $data['foto'];
+                  $vnamaproduk = $data['nama_produk'];
+                  $vhargaproduk = $data['harga_produk'];
+                  $vkategori = $data['kategori'];
+                  $vdeskripsi = $data['deskripsi'];     
+              
+    }
     
 ?>
 <!doctype html>
@@ -101,7 +149,7 @@ if(isset($_GET['id']))
             </div>
         <h2 class="text-center mt-3 mb-3">Postingan</h2>
             <form method="post" enctype="multipart/form-data">
-        <div class="text-center"><img src="<?php if(is_file("produk/".$vfoto)) { echo "produk/".$vfoto; } else { ?> <?php } ?>" alt=""></div>
+        <div class="text-center"><img width="100%" src="<?php if(is_file("produk/".$vfoto)) { echo "produk/".$vfoto; } else { ?> <?php } ?>" alt=""></div>
         <div class="form-floating mb-3">
             <input type="file" name="tfoto">
             <label for="floatingInput"></label>
@@ -115,7 +163,7 @@ if(isset($_GET['id']))
             <label for="floatingInput">Harga</label>
         </div>
         <div class="form-floating mt-3">
-    <select name="kategori" value="<?=@$vkategori?>" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+    <select name="kategori" value="<?=@$vkategori?>"  class="form-select" id="floatingSelect" aria-label="Floating label select example">
         <option <?php if(isset($vkategori) && $vkategori== "") {echo"selected";} ?> value=""></option>
         <option <?php if(isset($vkategori) && $vkategori== "makanan") {echo"selected";} ?> value="makanan">Makanan</option>
         <option <?php if(isset($vkategori) && $vkategori== "fashion") {echo"selected";} ?> value="fashion">Fashion</option>

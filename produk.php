@@ -24,6 +24,20 @@ if(isset($_GET['id']) && $_GET['id']) {
 $sql =" SELECT * FROM produk WHERE id='$idproduct' ";
 $result = $koneksi->query($sql);
 $produk =  $result->fetch_assoc();
+
+if(@$_GET['hal']== "hapus")
+{
+//persiapan hapus data
+$hapus = mysqli_query($koneksi, "DELETE FROM produk WHERE id='$_GET[id]' ");
+if($hapus){
+    echo "<script>
+        alert('Hapus Data Sukses!!');
+        document.location='home.php';
+  </script>";
+
+  }
+}
+
 ?>
 
 <!doctype html>
@@ -55,23 +69,22 @@ $produk =  $result->fetch_assoc();
             <div class="carousel-item active">
         <div class="col-12 text-center">
           <img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
-          <p style="font-size: 15px;"><?php echo $produk['nama_produk']; ?></p>
-          <p style="font-size: 15px;">
         </div>
       
           </div>
         </div>
-    </div>
-    <div class="card text-center " style="width: 22">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item ">NAMA PRODUK</p><?php echo $produk['nama_produk']; ?></li>
-            </ul>
-            </div>
-        <div class="card text-center mt-3" style="width: 22">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item" >HARGA PRODUK</p><?php echo $produk['harga_produk']; ?></li>
-      </ul>
-    </div>
+      </div>
+      <p><a href="posting.php?id=<?php echo $produk['id']; ?>" class="btn btn-success">Edit</a>
+      <a href="produk.php?hal=hapus&id=<?=$produk['id']?>" 
+   onclick="return confirm('apakah yakin ingin menghapus data ini?')" class="btn btn-danger float-end">Hapus</a>
+   <td>
+   </tr>
+      <div class="card text-center " style="width: 22">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item "><b><?php echo $produk['nama_produk']; ?></b></li> 
+          <li class="list-group-item" >HARGA : <?php echo $produk['harga_produk']; ?></li>
+        </ul>
+      </div>
     </div>
     <div id="produk" class="container">
     <h6 class="text-ligh mt-4" >Pilihan Toko</h6>
