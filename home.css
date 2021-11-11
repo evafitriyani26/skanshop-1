@@ -2,6 +2,10 @@
     width: 360px;
     background-color: rgba(255, 255, 255, 0);
     margin-top: 3px;
+    padding-top: 20px;
+}
+#search{
+    padding: 10%;
 }
 button {
     width: 28%;

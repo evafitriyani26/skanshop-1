@@ -13,6 +13,7 @@
 if(isset($_POST['bsimpan']))
 {
 //pengujian apakah data akan diedit atau disimpan baru  
+    $vid2 = $produk['id'];
     $lokasifoto='produk/';
     $namafoto = "";
     if(isset($_FILES['tfoto']['name'])) {
@@ -29,7 +30,7 @@ if(isset($_POST['bsimpan']))
                 `harga_produk`='".$_POST['harga_produk']."',
                 `kategori`='".$_POST['kategori']."',
                 `deskripsi`='".$_POST['deskripai']."',
-                 WHERE id='".$_GET['id']."'
+                 WHERE id='".$vid2."'
      ");
 
      if($edit) //jika edit sukses
@@ -59,56 +60,59 @@ if(isset($_POST['bsimpan']))
            '$_POST[deskripsi]')
    ");
 
-if($simpan)//Jika simpan suksess
-{
-echo "<script>
-alert('Simpan data suksess!');
-document.location='home.php';
-</script>";
-}
-else
-{
-echo "<script>
-alert('Simpan data GAGAL!!');
-document.location='posting.php';
-</script>";
-}       
+    if($simpan)//Jika simpan suksess
+    {
+    echo "<script>
+    alert('Simpan data suksess!');
+    document.location='home.php';
+    </script>";
+    }
+    else
+    {
+    echo "<script>
+    alert('Simpan data GAGAL!!');
+    document.location='posting.php';
+    </script>";
+    }       
 
-if(isset($_GET['hal']))
-{
-   //pengujian jika edit Data
-   if($_GET['hal']== "edit")
-   {
-        $tampil = mysqli_query($koneksi, "SELECT * FROM produk WHERE id = '$_GET[id]' ");
-        $data = mysqli_fetch_array($tampil);
-        if($data)
-        {
-            //Jika data ditemukan, maka data ditampung ke dalam variabel
-            $vfoto = $data['foto'];
-            $vnamaproduk = $data['nama_produk'];
-            $vhargaproduk = $data['harga_produk'];
-            $vkategori = $data['kategori'];
-            $vdeskripsi = $data['deskripsi'];    
-        
-        }
-        else if ($_GET['hal'] == "hapus")
-        {
-            //Persiapan hapus data
-            $hapus = mysqli_query($koneksi, "DELETE FROM produk WHERE id = '$_GET[id]' ");
-            if($hapus){
-                echo "<script>
-                    alert('Hapus Data Suksess!!');
-                    document.location='registrasi.php';
-                </script>";
+    if(isset($_GET['hal']))
+    {
+    //pengujian jika edit Data
+    if($_GET['hal']== "edit")
+    {
+            $tampil = mysqli_query($koneksi, "SELECT * FROM produk WHERE  = '$vid2' ");
+            $data = mysqli_fetch_array($tampil);
+            if($data)
+            {
+                //Jika data ditemukan, maka data ditampung ke dalam variabel
+                $vfoto = $data['foto'];
+                $vnamaproduk = $data['nama_produk'];
+                $vhargaproduk = $data['harga_produk'];
+                $vkategori = $data['kategori'];
+                $vdeskripsi = $data['deskripsi'];    
+            
+            }
+            else if ($_GET['hal'] == "hapus")
+            {
+                //Persiapan hapus data
+                $hapus = mysqli_query($koneksi, "DELETE FROM produk WHERE id = '$_GET[id]' ");
+                if($hapus){
+                    echo "<script>
+                        alert('Hapus Data Suksess!!');
+                        document.location='registrasi.php';
+                    </script>";
+                }
             }
         }
-    }
-}    
+    }    
 }
-
+    $vid = 0;
+    if (isset($_GET['id'])){
+        $vid = $_GET['id'];
+    }
 
     //tampilkan data yang akan diedit
-    $tampil = mysqli_query($koneksi, "SELECT * FROM produk WHERE id = '$_GET[id]' ");
+    $tampil = mysqli_query($koneksi, "SELECT * FROM produk WHERE id = '$vid' ");
     $data = mysqli_fetch_array($tampil); 
     if($data)
     {

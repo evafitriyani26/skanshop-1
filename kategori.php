@@ -42,49 +42,23 @@ if(empty($_SESSION['user'])) {
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="home.css">
-    <title>home</title>
+    <title>kategori</title>
   </head>
   <body>
-    <div class="container">
-        <h2 class="text-center">SkanShop</h2>
-        <p class="text-end"><a href="logout.php">Logout</a></p>
-        <p>Selamat Datang, <b><?php echo $user['nama']; ?></b></p>
-  </div>
   
   <!-- As a heading -->
-    <div class="container">
+    <div id="search" class="container">
         <form class="d-flex">
         <h5><input class="form-control me-5" type="search" placeholder="Search" aria-label="Search"></h5>
         <button class="btn btn-outline-width" type="submit"> <i class="bi bi-search"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"></i></button></h6>
       </form>
     </div>
     <div class="container">
-  <div class="card m-2">
-    <h6 class="text-center">Kategori</h6>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-6 text-center">
-          <a href="kategori.php"><img src="hamburger.png" width="56" height="51">
-          <p style="font-size: 10px;">Makanan</p></a>
-        </div>
-        <div class="col-6 text-center">
-          <a href="kategori.php"><img src="search (1).png"width="56" height="51">
-          <p style="font-size: 10px;">Fashion</p></a>
-        </div>
-        <div class="col-6 text-center">
-          <a href="kategori.php"><img src="electronics.png"width="56" height="51">
-          <p style="font-size: 10px;">Elektronik</p></a>
-        </div>
-        <div class="col-6 text-center">
-          <a href="kategori.php"><img src="customer-support.png"width="56" height="51">
-          <p style="font-size: 10px;">Jasa</p></a>
-        </div>
-      </div>
+        <h2 class="text-start">Kategori</h2>
     </div>
-  </div></div>
   <!-- As a heading -->
   <div class="container">
-    <h6 class="text-ligh">List Produk</h6>
+    <h6 class="text-Start">List Produk</h6>
     <div class="card-body">
       <div class="row">
       <?php foreach($produks as $produk) { ?>
