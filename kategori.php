@@ -9,12 +9,15 @@
  $koneksi= mysqli_connect($server, $userDB, $pass, $database)or die(mysqli_error($koneksi));
 session_start();
 if(empty($_SESSION['user'])) {
-  header("location: index.php?status=gagal");
+  header("location: kategori.php?kategori=fashion");
 }else{
   $user = $_SESSION['user'];
 }
-
- $sql =" SELECT * FROM produk ";
+$kategori = 0;
+    if (isset($_GET['kategori'])){
+        $kategori = $_GET['kategori'];
+    }
+ $sql =" SELECT * FROM produk WHERE kategori = '$kategori' " ;
  $result = $koneksi->query($sql);
  $produks = array();
   if($koneksi->query($sql)) { 
@@ -67,8 +70,8 @@ if(empty($_SESSION['user'])) {
       <div class="row">
       <?php foreach($produks as $produk) { ?>
         <div class="col-4 text-center">
-          <a href="produk.php?id=<?php echo $produk['id']; ?>"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
-          <p style="font-size: 15px;"><?php echo $produk['nama_produk']; ?></p></a>
+          <a href="kategori.php?id=<?php echo $produk['kategori']; ?>"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
+          <p style="font-size: 15px;"><?php echo $produk['kategori']; ?></p></a>
         </div>
         <?Php } ?>
       </div>
