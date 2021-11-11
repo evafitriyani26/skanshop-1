@@ -64,19 +64,19 @@ if(empty($_SESSION['user'])) {
     <div class="card-body">
       <div class="row">
         <div class="col-6 text-center">
-          <a href="kategori.php"><img src="hamburger.png" width="56" height="51">
+          <a href="kategori.php?kategori=Makanan"><img src="hamburger.png" width="56" height="51">
           <p style="font-size: 10px;">Makanan</p></a>
         </div>
         <div class="col-6 text-center">
-          <a href="kategori.php"><img src="search (1).png"width="56" height="51">
+          <a href="kategori.php?kategori=Fashion"><img src="search (1).png"width="56" height="51">
           <p style="font-size: 10px;">Fashion</p></a>
         </div>
         <div class="col-6 text-center">
-          <a href="kategori.php"><img src="electronics.png"width="56" height="51">
+          <a href="kategori.php?kategori=Elektronik"><img src="electronics.png"width="56" height="51">
           <p style="font-size: 10px;">Elektronik</p></a>
         </div>
         <div class="col-6 text-center">
-          <a href="kategori.php"><img src="customer-support.png"width="56" height="51">
+          <a href="kategori.php?kategori=Jasa"><img src="customer-support.png"width="56" height="51">
           <p style="font-size: 10px;">Jasa</p></a>
         </div>
       </div>

@@ -11,7 +11,7 @@ session_start();
 if(empty($_SESSION['user'])) {
   header("location: kategori.php?kategori=fashion");
 }else{
-  $user = $_SESSION['user'];
+  $userDB = $_SESSION['user'];
 }
 $kategori = 0;
     if (isset($_GET['kategori'])){
@@ -61,7 +61,7 @@ $kategori = 0;
       </form>
     </div>
     <div class="container">
-        <h2 class="text-start">Kategori</h2>
+        <h2 class="text-start"><?php echo $_GET['kategori']; ?></h2>
     </div>
   <!-- As a heading -->
   <div class="container">
@@ -70,8 +70,8 @@ $kategori = 0;
       <div class="row">
       <?php foreach($produks as $produk) { ?>
         <div class="col-4 text-center">
-          <a href="kategori.php?id=<?php echo $produk['kategori']; ?>"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
-          <p style="font-size: 15px;"><?php echo $produk['kategori']; ?></p></a>
+          <a href="produk.php?id=<?php echo $produk['id']; ?>"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
+          <p style="font-size: 15px;"><?php echo $produk['nama_produk']; ?></p></a>
         </div>
         <?Php } ?>
       </div>
