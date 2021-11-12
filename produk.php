@@ -82,29 +82,10 @@ if($hapus){
       <div class="card text-center " style="width: 22">
         <ul class="list-group list-group-flush">
           <li class="list-group-item "><b><?php echo $produk['nama_produk']; ?></b></li> 
-          <li class="list-group-item" >HARGA : <?php echo $produk['harga_produk']; ?></li>
+          <li class="list-group-item" ><?php echo $produk['harga_produk']; ?></li>
         </ul>
       </div>
     </div>
-    <div id="produk" class="container">
-    <h6 class="text-ligh mt-4" >Pilihan Toko</h6>
-  <div class="card-body">
-    <div class="row">
-      <div class="col-4 text-center">
-        <a href="produk1.html"><img src="eat.png" width="80" height="80">
-        <p style="font-size: 8px;">Makanan</p></a>
-      </div>
-      <div class="col-4 text-center">
-        <a href="produk1.html"><img src="hotdog 2.png"width="80" height="80">
-        <p style="font-size: 8px;">Makanan</p></a>
-      </div>
-       <div class="col-4 text-center">
-        <a href="produk1.html"><img src="makanan2.png" width="80" height="80">
-        <p style="font-size: 8px;">Makanan</p></a>
-      </div>
-        </div>
-   </div>
-   </div>
     <div id="satu" class="container"><div class="text-start">
       <p class="fw-bold">
         Deskripsi Item
@@ -115,6 +96,25 @@ if($hapus){
         
             </div>
           </div>
+          <div id="produk" class="container">
+    <h6 class="text-ligh mt-4" >Produk Lainya</h6>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-4 text-center">
+        <a href="produk.php?id=<?php echo $produk['id']; ?>"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
+        <p style="font-size: 8px;"><?php echo $produk['nama_produk']; ?></p></a>
+      </div>
+      <div class="col-4 text-center">
+        <a href="produk.php?id=<?php echo $produk['id']; ?>"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
+        <p style="font-size: 8px;"><?php echo $produk['nama_produk']; ?></p></a>
+      </div>
+       <div class="col-4 text-center">
+        <a href="produk1.html"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
+        <p style="font-size: 8px;"><?php echo $produk['nama_produk']; ?></p></a>
+      </div>
+        </div>
+   </div>
+   </div>
     </div>
     </div>
     <div id="kandang" class="container">

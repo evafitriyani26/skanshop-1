@@ -13,8 +13,13 @@ if(empty($_SESSION['user'])) {
 }else{
   $user = $_SESSION['user'];
 }
+if(isset($_GET['nama_produk']) && $_GET['nama_produk'] ) {
+    $nama_produk= $_GET['nama_produk'];
 
- $sql =" SELECT * FROM produk LIMIT 0,10 ";
+}else{
+    $nama_produk="";
+}
+ $sql =" SELECT * FROM produk WHERE nama_produk LIKE '%$nama_produk%' ";
  $result = $koneksi->query($sql);
  $produks = array();
   if($koneksi->query($sql)) { 
@@ -46,46 +51,21 @@ if(empty($_SESSION['user'])) {
     <title>home</title>
   </head>
   <body>
-    <div class="container">
-        <h2 class="text-center">SkanShop</h2>
-        <p class="text-end"><a href="logout.php">Logout</a></p>
-        <p>Selamat Datang, <b><?php echo $user['nama']; ?></b></p>
-  </div>
+  <div class="container">
+          <div class="d-flex justify-content-start">
+            <a href="home.php"><i class="bi bi-arrow-left mt-3"></i></a>
+          </div>
   
   <!-- As a heading -->
     <div class="container">
-        <form class="d-flex" action="search.php" method="get">
-        <h5><input name="nama_produk" class="form-control me-5" type="search" placeholder="Search" aria-label="Search"></h5>
-        <a href="search.php" class="btn btn-outline-width" type="submit"> <i class="bi bi-search"> </i></a></h6>
+        <form class="d-flex" method="get">
+        <h5><input class="form-control me-5" name="nama_produk" type="search" placeholder="Search" aria-label="Search"></h5>
+        <button class="btn btn-outline-width" type="submit"> <i class="bi bi-search"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"></i></button></h6>
       </form>
     </div>
-    <div class="container">
-  <div class="card m-2">
-    <h6 class="text-center">Kategori</h6>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-6 text-center">
-          <a href="kategori.php?kategori=Makanan"><img src="hamburger.png" width="56" height="51">
-          <p style="font-size: 10px;">Makanan</p></a>
-        </div>
-        <div class="col-6 text-center">
-          <a href="kategori.php?kategori=Fashion"><img src="search (1).png"width="56" height="51">
-          <p style="font-size: 10px;">Fashion</p></a>
-        </div>
-        <div class="col-6 text-center">
-          <a href="kategori.php?kategori=Elektronik"><img src="electronics.png"width="56" height="51">
-          <p style="font-size: 10px;">Elektronik</p></a>
-        </div>
-        <div class="col-6 text-center">
-          <a href="kategori.php?kategori=Jasa"><img src="customer-support.png"width="56" height="51">
-          <p style="font-size: 10px;">Jasa</p></a>
-        </div>
-      </div>
-    </div>
-  </div></div>
   <!-- As a heading -->
   <div class="container">
-    <h6 class="text-ligh">List Produk</h6>
+    <h6 class="text-ligh">Hasil Pencarian</h6>
     <div class="card-body">
       <div class="row">
       <?php foreach($produks as $produk) { ?>
