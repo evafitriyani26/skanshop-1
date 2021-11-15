@@ -32,7 +32,7 @@ if(empty($_SESSION['user'])) {
 <html lang="en">
   <head>
     <style>
-      body {height: 200vh; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
+      body {height: 1000vh; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
       
     </style>
     <!-- Required meta tags -->
