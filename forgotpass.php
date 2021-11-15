@@ -129,5 +129,6 @@ if(isset($_POST['bsimpan']))
           <a href="index.php" id="id" type="login" class="btn btn-primary" name="bsimpan">Batal</a>
         </div>
       </form>
+    </div>
   </body>
 </html>
