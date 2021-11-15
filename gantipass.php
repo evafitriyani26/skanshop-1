@@ -103,10 +103,11 @@ if(@$_POST['pass_lama']){
 
  <!-- <button id="Login" a href="" class="btn btn-primary">Login</button> -->
                   
-        <div class="text-end mt-5">
-          <button type="submit" class="btn btn-primary" name="bsimpan">Lanjutkan</buton>
-          <button type="reset" class="btn btn-primary" name="bsimpan">Batal</button>
+ <div class="text-end mt-5">
+          <a href="profil.php" type="submit" class="btn btn-primary" name="bsimpan">Lanjutkan</a>
+          <a href="profil.php" type="reset" class="btn btn-primary" name="bsimpan">Batal</a>
         </div>
       </form>
+    </div>
   </body>
 </html>

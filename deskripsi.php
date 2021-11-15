@@ -73,10 +73,10 @@
 
     <div class="container">
     <div class="d-flex justify-content-start">
-            <a href="home.php"><i class="bi bi-arrow-left mt-3"></i></a>
-            </div>
-        <h2 class="text-center">Postingan</h2>
-        <form method="post" enctype="multipart/form-data">
+      <a href="home.php"><i class="bi bi-arrow-left mt-3"></i></a>
+    </div>
+    <h2 class="text-center">Postingan</h2>
+    <form method="post" enctype="multipart/form-data">
     <div class="text-center"><img src="<?php if(is_file("image/".$vfoto)) { echo "image/".$vfoto; } else { ?><?php } ?>" alt=""></div>
       <div class="form-floating mb-3">
         <input type="file" name="tfoto">
@@ -85,40 +85,38 @@
       <div class="form-floating mt-3">
         <input type="text" name="nama_produk" value="<?=@$vnamaproduk?>" class="form-control" id="floatingInput" placeholder="Nama Produk">
         <label for="floatingInput">Nama Produk</label>
-</div>
-<div class="form-floating mt-3">
+      </div>
+      <div class="form-floating mt-3">
         <input type="text" name="harga_produk" value="<?=@$vhargaproduk?>" class="form-control" class="form-control "  placeholder="Harga">
         <label for="floatingInput">Harga</label>
       </div>
       <div class="form-floating mt-3">
-  <select name="kategori" value="<?=@$vkategori?>" class="form-select" id="floatingSelect" aria-label="Floating label select example">
-    <option <?php if(isset($vkategori) && $vkategori== "") {echo"selected";} ?> value="">Pilih</option>
-    <option <?php if(isset($vkategori) && $vkategori== "makanan") {echo"selected";} ?> value="makanan">makanan</option>
-    <option <?php if(isset($vkategori) && $vkategori== "fashion") {echo"selected";} ?> value="fashion">fashion</option>
-    <option <?php if(isset($vkategori) && $vkategori== "jasa") {echo"selected";} ?> value="jasa">jasa</option>
-    <option <?php if(isset($vkategori) && $vkategori== "elektronic") {echo"selected";} ?> value="elektronic">elektronic</option>
-  </select>
-  <label for="floatingSelect">Kategori Produk</label>
-</div>
+        <select name="kategori" value="<?=@$vkategori?>" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+          <option <?php if(isset($vkategori) && $vkategori== "") {echo"selected";} ?> value="">Pilih</option>
+          <option <?php if(isset($vkategori) && $vkategori== "makanan") {echo"selected";} ?> value="makanan">makanan</option>
+          <option <?php if(isset($vkategori) && $vkategori== "fashion") {echo"selected";} ?> value="fashion">fashion</option>
+          <option <?php if(isset($vkategori) && $vkategori== "jasa") {echo"selected";} ?> value="jasa">jasa</option>
+          <option <?php if(isset($vkategori) && $vkategori== "elektronic") {echo"selected";} ?> value="elektronic">elektronic</option>
+        </select>
+        <label for="floatingSelect">Kategori Produk</label>
+      </div>
       <div class="card-body"></div>
-  <div class="text-ligh mt-2">Deskripsi Item</div>
-    <div class="form-floating">
+      <div class="text-ligh mt-2">Deskripsi Item</div>
+      <div class="form-floating">
         <input type="text" name="deskripsi" value="<?=@$vdeskripsi?>" class="form-control "  placeholder="Keterangan">
         <label for="floatingInput">Keterangan</label>
       </div>
       <div class="d-flex justify-content-around">
-        <div class="text-center mt-5">
+      <div class="text-center mt-5">
             <!-- <button id="Login" a href="" class="btn btn-primary">Login</button> -->
-            <Button id="login" name="bsimpan" type="submit" class="btn btn-primary mt-3" role="button">posting</Button>
-          </div>
-        </div>
-      
+        <Button id="login" name="bsimpan" type="submit" class="btn btn-primary mt-3" role="button">posting</Button>
       </div>
-  </div>
-
-</form>
-    </div>
-    </div>
+      </div>
+      </div>
+      </div>
+    </form>
+      </div>
+      </div>
 
     <!-- akhir card form -->
   </body>
