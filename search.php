@@ -1,19 +1,4 @@
 <?php
-<<<<<<< 
- $koneksi= mysqli_connect('localhost', 'root', '', 'skanshop');
- if(!$koneksi){
-     echo "koneksi Gagal";
- }
-?>
-
-<?php
-
-$tampil = mysqli_query($koneksi, "SELECT * FROM produk WHERE ");
-$data = mysqli_fetch_array($tampil);
-  if($data)
-  {
-?>
-=======
 
  //koneksi Database
  $server= "localhost";
@@ -104,4 +89,3 @@ if(isset($_GET['nama_produk']) && $_GET['nama_produk'] ) {
   </div>
   </body>
 </html>
->>>>>>> 432eeeba8f944dcba78298e231fe1496764015f7
