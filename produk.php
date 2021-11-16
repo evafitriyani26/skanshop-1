@@ -21,9 +21,15 @@ if(isset($_GET['id']) && $_GET['id']) {
   exit;
 }
  
-$sql =" SELECT * FROM produk WHERE id='$idproduct' ";
+$sql =" SELECT *,
+(select wa from user where id=id_user) as 'wa',
+(select fb from user where id=id_user) as 'fb',
+(select ig from user where id=id_user) as 'ig',
+(select nama from user where id=id_user) as 'nama_user' FROM produk WHERE id='$idproduct' ";
 $result = $koneksi->query($sql);
 $produk =  $result->fetch_assoc();
+
+
 
 if(@$_GET['hal']== "hapus")
 {
@@ -54,6 +60,9 @@ if($hapus){
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="produk.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <title>Halaman Produk</title>
     <div id="head" class="container"><a id="arrow" href="home.php" class="btn btn" role="button"><i class="bi bi-arrow-left"></i><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"></i></a></div>
   </head>
@@ -68,15 +77,16 @@ if($hapus){
           <div class="carousel-inner">
             <div class="carousel-item active">
         <div class="col-12 text-center">
-          <img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
+          <img src="<?php echo "produk/".$produk['foto']; ?>" width="100%">
         </div>
       
           </div>
         </div>
-      </div>
+      </div><?php if(isset($user['id']) && $produk['id_user']==$user['id']) {?> 
       <p><a href="posting.php?id=<?php echo $produk['id']; ?>" class="btn btn-success">Edit</a>
       <a href="produk.php?hal=hapus&id=<?=$produk['id']?>" 
-   onclick="return confirm('apakah yakin ingin menghapus data ini?')" class="btn btn-danger float-end">Hapus</a>
+   onclick="return confirm('apakah yakin ingin menghapus data ini?')" class="btn btn-danger float-end">Hapus</a></p>
+      <?php } ?>
    <td>
    </tr>
       <div class="card text-center " style="width: 22">
@@ -86,6 +96,7 @@ if($hapus){
         </ul>
       </div>
     </div>
+    <h4 class="text-start mt-2"><?php echo $produk['nama_user']; ?></h4>
     <div id="satu" class="container"><div class="text-start">
       <p class="fw-bold">
         Deskripsi Item
@@ -109,7 +120,7 @@ if($hapus){
         <p style="font-size: 8px;"><?php echo $produk['nama_produk']; ?></p></a>
       </div>
        <div class="col-4 text-center">
-        <a href="produk1.html"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
+        <a href="produk.php"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
         <p style="font-size: 8px;"><?php echo $produk['nama_produk']; ?></p></a>
       </div>
         </div>
@@ -119,9 +130,9 @@ if($hapus){
     </div>
     <div id="kandang" class="container">
       <div id="tombol-bawah" class="d-flex justify-content-around">
-      <button class="btn btn-outline-width" type="submit"><i class="bi bi-whatsapp"><?php echo $user['wa']; ?></i> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"></i></button>
-      <button class="btn btn-outline-width" type="submit"><i class="bi bi-facebook"></i> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"></i></button>
-      <button class="btn btn-outline-width" type="submit"><i class="bi bi-instagram"></i> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"></i></button>
+      <a target="_blank" class="btn btn-outline-width" href="https://wa.me/<?php echo $produk['wa']; ?>"><i class="bi bi-whatsapp"></i></a>
+      <a target="_blank" class="btn btn-outline-width" href="<?php echo $produk['fb']; ?>"><i class="bi bi-facebook"></i></a>
+      <a target="_blank" class="btn btn-outline-width" href="<?php echo $produk['ig']; ?>"><i class="bi bi-instagram"></i></a>
       </div>
       </div>
     </div>

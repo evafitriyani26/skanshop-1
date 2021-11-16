@@ -14,7 +14,7 @@ if(empty($_SESSION['user'])) {
   $user = $_SESSION['user'];
 }
 
- $sql =" SELECT * FROM produk LIMIT 0,10 ";
+ $sql =" SELECT * FROM produk order by id desc LIMIT 0,18 ";
  $result = $koneksi->query($sql);
  $produks = array();
   if($koneksi->query($sql)) { 
@@ -33,6 +33,7 @@ if(empty($_SESSION['user'])) {
   <head>
     <style>
       body {height: 1000vh; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
+      body {height: 100%; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
       
     </style>
     <!-- Required meta tags -->
