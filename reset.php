@@ -26,7 +26,7 @@ if(isset($_POST['bsimpan']))
                         //alihkan halaman
                         if($simpan) //jika edit sukses
                         {
-                          header("location:Ganti-Pass.php");
+                          header("location:forgotpass.php");
                         exit;
                         } else {
                          echo "gagal";
@@ -59,7 +59,7 @@ if(isset($_POST['bsimpan']))
 <html lang="en">
   <head>
     <style>
-      body {height: 100vmax; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
+      body {height: 100vh; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
     </style>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -67,16 +67,21 @@ if(isset($_POST['bsimpan']))
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="regestrasi.css">
+    <link rel="stylesheet" type="text/css" href="">
     <title>reset pass</title>
+    <style>
+      .container{
+        width : 360px;
+      }
+    </style>
   </head>
   <body>
       <p><h2 class="text-center">Reset Untuk Lupa Password</h2></p>
       <div class="container">
-  <h6 class="text-ligh">Lupa password anda?Masukkan Email anda disini untuk melalui proses reset password</h6>
+  <h6 class="text-center">Lupa password anda? <br> Masukkan Email anda disini untuk melalui proses reset password.</h6>
   <form method="post">
-  <div class="form-group">
-  <label>Alamat Email</label>
+  <div class="form-group mt-5">
+  <h6>Alamat Email</h6>
   <input type="text" name="temail" value="<?=@$vemail?>" class="form-control">
     </div>
   <div class="form-group">
@@ -87,7 +92,7 @@ if(isset($_POST['bsimpan']))
   </form>
        
    </div>
-   <div type="anda jika belum punya akun?" class="text-center mt-5"></div>
+   <div type="anda jika belum punya akun?" class="text-center mt-3"></div>
    <div class="text-center">
    <a href="index.php">Back to Login</a>
    </div>

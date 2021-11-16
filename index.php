@@ -44,7 +44,7 @@ if(isset($_GET['status']) && $_GET['status'] == "gagal") {
 				<input type="password" name="password" placeholder="Masukkan password" required="" class="form-control">
 				</div>
 				<div class="text-end">
-				<a href="Forgotpass.php">Forgot Password</a> 
+				<a href="reset.php">Forgot Password</a> 
 				</div>
 				<div class="text-center mt-5">
 					<input class="btn btn-primary" type="submit" name="input" value="LOGIN">
