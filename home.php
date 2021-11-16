@@ -14,7 +14,7 @@ if(empty($_SESSION['user'])) {
   $user = $_SESSION['user'];
 }
 
- $sql =" SELECT * FROM produk LIMIT 0,10 ";
+ $sql =" SELECT * FROM produk order by id desc LIMIT 0,18 ";
  $result = $koneksi->query($sql);
  $produks = array();
   if($koneksi->query($sql)) { 

@@ -1,12 +1,17 @@
 <?php
     //koneksi Database
     $server= "localhost";
-    $user= "root";
+    $userdb= "root";
     $pass= "";
     $database= "skanshop";
 
-    $koneksi= mysqli_connect($server, $user, $pass, $database)or die(mysqli_error($koneksi));
-
+    $koneksi= mysqli_connect($server, $userdb, $pass, $database)or die(mysqli_error($koneksi));
+    session_start();
+    if(empty($_SESSION['user'])) {
+      header("location: index.php?status=gagal");
+    }else{
+      $user = $_SESSION['user'];
+    }
 
 //jika tombol simpan di klik
 //print_r($_POST);exit
@@ -30,7 +35,8 @@ if(isset($_POST['bsimpan']))
                 `harga_produk`='".$_POST['harga_produk']."',
                 `kategori`='".$_POST['kategori']."',
                 `deskripsi`='".$_POST['deskripsi']."'
-                 WHERE id='".$vid2."'
+                 WHERE id='".$vid2."' AND id_user='$user[id]'
+                
      ");
 
      if($edit) //jika edit sukses
@@ -52,12 +58,14 @@ if(isset($_POST['bsimpan']))
     }
     else{
     
-    $simpan = mysqli_query($koneksi, "INSERT INTO produk (`foto`,`nama_produk`,`harga_produk`,`kategori`,`deskripsi`)
+    $simpan = mysqli_query($koneksi, "INSERT INTO produk (`foto`,`nama_produk`,`harga_produk`,`kategori`,`deskripsi`,`id_user`)
     VALUES ('$namafoto',
            '$_POST[nama_produk]',
            '$_POST[harga_produk]',
            '$_POST[kategori]',
-           '$_POST[deskripsi]')
+           '$_POST[deskripsi]',
+           '$user[id]'
+           )
    ");
     }
     if($simpan)//Jika simpan suksess
@@ -82,7 +90,7 @@ if(isset($_POST['bsimpan']))
             if ($_GET['hal'] == "hapus")
             {
                 //Persiapan hapus data
-                $hapus = mysqli_query($koneksi, "DELETE FROM produk WHERE id = '$_GET[id]' ");
+                $hapus = mysqli_query($koneksi, "DELETE FROM produk WHERE id = '$_GET[id]'  AND id_user='$user[id]' ");
                 if($hapus){
                     echo "<script>
                         alert('Hapus Data Suksess!!');
