@@ -6,52 +6,41 @@
     $database= "skanshop";
 
     $koneksi= mysqli_connect($server, $user, $pass, $database)or die(mysqli_error($koneksi));
-
-
+$eror= false;
+ini_set("SMTP","ssl://smtp.gmail.com");
+ini_set("smtp_port","465");
 //jika tombol simpan di klik
 //print_r($_POST);exit
 if(isset($_POST['bsimpan']))
 {
-    //pengujian apakah data akan diedit atau disimpan baru
+    //Cek apakah email ada di database/tidak
+    $tampil = mysqli_query($koneksi, "SELECT * FROM user WHERE email = '$_POST[temail]' ");
+        $data = mysqli_fetch_array($tampil);
+          if($data)
+          {
+            $to      = 'dwipoetra115@gmail.com';
+            $subject = 'Reset password';
+            $message = 'Gunakan Link berikut untuk reset password';
+            $headers = 'From: evafitriyani0026@gmail.com' . "\r\n" .
+                       'Reply-To: evafitriyani0026@gmail.com' . "\r\n" .
+                       'X-Mailer: PHP/' . phpversion();
+
+      mail($to, $subject, $message, $headers);    
+      //Kalau ada maka kirim link ke email
+          }else{
+            $eror=true;
+           
+          }
+}   
   
        
             
-                $simpan = mysqli_query($koneksi, "INSERT INTO user (`email`)
-                                          VALUES ('$_POST[temail]')
-                                         ");
-
-                            
-                    if($simpan)//Jika simpan suksess
-                    {
-                        //alihkan halaman
-                        if($simpan) //jika edit sukses
-                        {
-                          header("location:forgotpass.php");
-                        exit;
-                        } else {
-                         echo "gagal";
-                        exit;
-    
-                    }
+               
                    
-        } 
-      }
+        
       
-        if(isset($_GET['id']))
-        {
-            //Pengujian jika data edit
-            if($_GET['id'] == "")
-            {
-                $tampil = mysqli_query($koneksi, "SELECT * FROM user WHERE id = '$_GET[id]' ");
-                $data = mysqli_fetch_array($tampil);
-                if($data)
-                {
-                //Jika data ditemukan, maka data ditampung ke dalam variabel
-                $vemail = $data['email'];
-                }
-              }
-            }
-
+      
+        
 
 
 ?>
@@ -79,15 +68,22 @@ if(isset($_POST['bsimpan']))
       <p><h2 class="text-center">Reset Untuk Lupa Password</h2></p>
       <div class="container">
   <h6 class="text-center">Lupa password anda? <br> Masukkan Email anda disini untuk melalui proses reset password.</h6>
-  <form method="post">
+  <form method="post" action="">
+   <?php if(isset($eror) && $eror==true){ ?>
+    <div class="alert alert-danger" >
+      Email tidak ditemukan!!
+    </div>
+   <?php } ?>
+  
+  
   <div class="form-group mt-5">
   <h6>Alamat Email</h6>
-  <input type="text" name="temail" value="<?=@$vemail?>" class="form-control">
+  <input type="email" name="temail" class="form-control">
     </div>
   <div class="form-group">
       <!-- <button id="Login" a href="" class="btn btn-primary">Login</button> -->
       <div class="text-center">
-      <Button id="login" name="bsimpan" type="submit" class="btn btn-primary mt-3" role="button">Simpan</Button>
+      <Button id="login" name="bsimpan" type="submit" class="btn btn-primary mt-3" role="button">Submit</Button>
           </div>
   </form>
        

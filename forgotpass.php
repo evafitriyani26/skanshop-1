@@ -117,7 +117,7 @@ if(isset($_POST['bsimpan']))
     
     <div class="container">
       <form id="input-ganti_pass" method="post" action="">           
-        <h6>Password Lama</h6>
+        <h6>Password Baru</h6>
         <input type="password" name="tpassword" value="" class="form-control" required>
         <h6 class="mt-3">Confirm Password Baru</h6>
         <input type="password" name="tpassword" value="" class="form-control" required>
