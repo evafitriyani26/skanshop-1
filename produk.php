@@ -25,7 +25,7 @@ $sql =" SELECT *,
 (select wa from user where id=id_user) as 'wa',
 (select fb from user where id=id_user) as 'fb',
 (select ig from user where id=id_user) as 'ig',
-(select nama from user where id=id_user) as 'nama_user' FROM produk WHERE id='$idproduct' "; 
+(select nama from user where id=id_user) as 'nama_user' FROM produk WHERE id='".(int)$idproduct."' "; 
 $result = $koneksi->query($sql);
 $produk =  $result->fetch_assoc();
 
@@ -34,7 +34,7 @@ $produk =  $result->fetch_assoc();
 if(@$_GET['hal']== "hapus")
 {
 //persiapan hapus data
-$hapus = mysqli_query($koneksi, "DELETE FROM produk WHERE id='$_GET[id]' ");
+$hapus = mysqli_query($koneksi, "DELETE FROM produk WHERE id='".(int)$_GET[id]."' ");
 if($hapus){
     echo "<script>
         alert('Hapus Data Sukses!!');
