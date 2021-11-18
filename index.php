@@ -1,72 +1,108 @@
 <?php
-// Definisi
-// Declarasi
+ //koneksi Database
+ $server= "localhost";
+ $userDB= "root";
+ $pass= "";
+ $database= "skanshop";
 
-session_start();
-	if(isset($_SESSION['user'])){
-		header("location:home.php");
-	}
-$notifikasi = "";
-if(isset($_GET['status']) && $_GET['status'] == "gagal") {
-	$notifikasi = "Login Gagal";
-}
+ $koneksi= mysqli_connect($server, $userDB, $pass, $database)or die(mysqli_error($koneksi));
 
+ $sql =" SELECT * FROM produk order by id desc LIMIT 0,18 ";
+ $result = $koneksi->query($sql);
+ $produks = array();
+  if($koneksi->query($sql)) { 
+    while($row = $result->fetch_assoc()) {
+      $produks[] = $row;
+    }
+  } else {
+    echo "Query error";
+    exit;
+  }
+  
 ?>
+
 <!doctype html>
 <html lang="en">
   <head>
-		<style>
-		body { height: 100% ; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
-		</style>
-		<!-- Required meta tags -->
-
-		<!-- Bootstrap CSS -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<title>login</title>
+    <style>
+      body {height: 100%; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
+    </style>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <title>home</title>
   </head>
   <body>
-	<div class="text-center"><img src="user 1.png" alt=""></div>
-	<div class="container">
-	<h2 class="text-center">Login</h2>
-	<?php if($notifikasi) { ?>
-	<div class="alert alert-danger" role="alert">
-		<?php echo $notifikasi; ?>
+    <div class="container">
+        <h2 class="text-center">SkanShop</h2>
+<div class="row">
+	<div class="col-md d-grid ">
+		<a href="login.php" class="btn btn-primary btn-block" role="button">Login</a>
 	</div>
-	<?php } ?>
-		<form action = "login.php" method = "post" name = "form_input">
-			<div class="form-group">
-				<label>Email</label>
-				<input type="text" name="email" placeholder="Masukkan email" required="" class="form-control">
-				</div>
-				<div class="form-group mt-2">
-				<label>Password</label>
-				<input type="password" name="password" placeholder="Masukkan password" required="" class="form-control">
-				</div>
-				<div class="text-end">
-				<a href="reset.php">Forgot Password</a> 
-				</div>
-				<div class="text-center mt-5">
-					<input class="btn btn-primary" type="submit" name="input" value="LOGIN">
-				</div>			
-			</div>
-		</form>
-					<p class="text-center mt-3"> Jika anda belum mempunyai akun?</p>
-			<div class="text-center mt-2">
-				<a href="registrasi.php">Daftar disini</a> 
-				</div>
-				
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
-    -->
+	<div class="col-md d-grid ">
+      <a href="registrasi.php" class="btn btn-primary btn-block" role="button">Daftar</a>
+	</div>
+</div>
+  	</div>
+  
+  <!-- As a heading -->
+    <div class="container">
+        <form class="d-flex" action="search.php" method="get">
+        <h5><input name="nama_produk" class="form-control me-5" type="search" placeholder="Search" aria-label="Search"></h5>
+        <a href="search.php" class="btn btn-outline-width" type="submit"> <i class="bi bi-search"> </i></a></h6>
+      </form>
+    </div>
+    <div class="container">
+  <div class="card m-2">
+    <h6 class="text-center">Kategori</h6>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-6 text-center">
+          <a href="kategori.php?kategori=Makanan"><img src="hamburger.png" width="56" height="51">
+          <p style="font-size: 10px;">Makanan</p></a>
+        </div>
+        <div class="col-6 text-center">
+          <a href="kategori.php?kategori=Fashion"><img src="search (1).png"width="56" height="51">
+          <p style="font-size: 10px;">Fashion</p></a>
+        </div>
+        <div class="col-6 text-center">
+          <a href="kategori.php?kategori=Elektronik"><img src="electronics.png"width="56" height="51">
+          <p style="font-size: 10px;">Elektronik</p></a>
+        </div>
+        <div class="col-6 text-center">
+          <a href="kategori.php?kategori=Jasa"><img src="customer-support.png"width="56" height="51">
+          <p style="font-size: 10px;">Jasa</p></a>
+        </div>
+      </div>
+    </div>
+  </div></div>
+  <!-- As a heading -->
+  <div class="container">
+    <h6 class="text-ligh">List Produk</h6>
+    <div class="card-body">
+      <div class="row">
+      <?php foreach($produks as $produk) { ?>
+        <div class="col-4 text-center">
+          <a href="produk.php?id=<?php echo $produk['id']; ?>"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
+          <p style="font-size: 15px;"><?php echo $produk['nama_produk']; ?></p></a>
+        </div>
+        <?Php } ?>
+      </div>
+      </div>
+      </div>
+      <div id="kandang" class="container">
+      <div id="tombol-bawah" class="d-flex justify-content-around">
+      <a href="home.php" class="btn btn" role="button"> <i class="bi bi-house-door-fill"></i></a>
+      <a href="posting.php" class="btn btn" role="button"> <i class="bi bi-cart4"></i></a>
+      <a href="profil.php" class="btn btn" role="button"><i class="bi bi-person-circle"></i></a>
+      </div>
+      </div>
+    </div>
+  
+  </div>
   </body>
-        
-  </html>
+</html>
