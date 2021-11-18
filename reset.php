@@ -33,16 +33,6 @@ if(isset($_POST['bsimpan']))
           }
 }   
   
-       
-            
-               
-                   
-        
-      
-      
-        
-
-
 ?>
 <!doctype html>
 <html lang="en">

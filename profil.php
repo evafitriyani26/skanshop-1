@@ -79,7 +79,7 @@ if(isset($_POST['bsimpan']))
 <html lang="en">
   <head>
     <style>
-      body {height: 200vh; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
+      body {height: 100%; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
       
     </style>
 
@@ -147,8 +147,8 @@ if(isset($_POST['bsimpan']))
           </div>
           <!-- <button id="Login" a href="" class="btn btn-primary">Login</button> -->
           <div>
-            <a id="login" class="btn btn-primary mt-3" href="Gantipass.php" role="button">Ganti Password</a>
-            <Button name="bsimpan" type="submit" class="btn btn-primary mt-3" role="button">Simpan</Button>
+            <a id="login" class="btn btn-primary mt-3 mb-5" href="Gantipass.php" role="button">Ganti Password</a>
+            <Button name="bsimpan" type="submit" class="btn btn-primary mt-3 mb-5" role="button">Simpan</Button>
           </div>
       </form>
     </div>
