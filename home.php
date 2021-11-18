@@ -1,5 +1,4 @@
 <?php
-
  //koneksi Database
  $server= "localhost";
  $userDB= "root";
