@@ -130,7 +130,7 @@ if(isset($_POST['bsimpan']))
         <link rel="stylesheet" type="text/css" href="">
     </head>
     <style>
-        body { height: 150vh; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
+        body { height: 100%; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
         .container{
             width : 360px;
             background-color : white;

@@ -16,7 +16,7 @@ if(isset($_GET['status']) && $_GET['status'] == "gagal") {
 <html lang="en">
   <head>
 		<style>
-		body { height: 100vh; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
+		body { height: 100% ; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
 		</style>
 		<!-- Required meta tags -->
 
@@ -39,7 +39,7 @@ if(isset($_GET['status']) && $_GET['status'] == "gagal") {
 				<label>Email</label>
 				<input type="text" name="email" placeholder="Masukkan email" required="" class="form-control">
 				</div>
-				<div class="form-group">
+				<div class="form-group mt-2">
 				<label>Password</label>
 				<input type="password" name="password" placeholder="Masukkan password" required="" class="form-control">
 				</div>
@@ -52,7 +52,7 @@ if(isset($_GET['status']) && $_GET['status'] == "gagal") {
 			</div>
 		</form>
 					<p class="text-center mt-3"> Jika anda belum mempunyai akun?</p>
-			<div class="text-center mt-3">
+			<div class="text-center mt-2">
 				<a href="registrasi.php">Daftar disini</a> 
 				</div>
 				
