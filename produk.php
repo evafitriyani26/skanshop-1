@@ -1,12 +1,7 @@
 <?php
 
-//koneksi Database
-$server = "localhost";
-$userDB = "root";
-$pass = "";
-$database = "skanshop";
+include 'koneksi.php';
 
-$koneksi = mysqli_connect($server, $userDB, $pass, $database) or die(mysqli_error($koneksi));
 session_start();
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
@@ -38,7 +33,7 @@ if (@$_GET['hal'] == "hapus") {
 }
 
 
-$sql =" SELECT * FROM produk WHERE id_user='$user[id]' order by id desc LIMIT 0,18 ";
+$sql =" SELECT * FROM produk WHERE id_user='$produk[id_user]' order by id desc LIMIT 0,18 ";
 $result = $koneksi->query($sql);
 $produks = array();
  if($koneksi->query($sql)) { 

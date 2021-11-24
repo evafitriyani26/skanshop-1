@@ -1,6 +1,8 @@
 <?php
 
 // Declarasi
+    include 'koneksi.php';
+
 
 session_start();
 	if(isset($_SESSION['user'])){
@@ -12,8 +14,6 @@ if(isset($_GET['status']) && $_GET['status'] == "gagal") {
 }
 
 //untuk penghubung dengan file koneksi
-    include 'koneksi.php';
-
     if(isset($_POST['input'])){
         $email = $_POST['email'];
         $password= $_POST['password'];
