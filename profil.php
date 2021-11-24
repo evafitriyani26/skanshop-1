@@ -1,12 +1,5 @@
 <?php
- //koneksi Database
- $server= "localhost";
- $user= "root";
- $pass= "";
- $database= "skanshop";
-
- $koneksi= mysqli_connect($server, $user, $pass, $database)or die(mysqli_error($koneksi));
-
+ include("koneksi.php");
  session_start();
  if(empty($_SESSION['user'])){
    header("location: index.php?status=gagal");

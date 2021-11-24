@@ -1,9 +1,11 @@
 <?php
 
-    $koneksi= mysqli_connect('localhost', 'root', '', 'skanshop');
-    if(!$koneksi){
-        echo "koneksi Gagal";
-    }
-    
+  //koneksi Database
+ $server= "localhost";
+ $userDB= "root";
+ $pass= "";
+ $database= "skanshop";
+
+ $koneksi= mysqli_connect($server, $userDB, $pass, $database)or die(mysqli_error($koneksi));
 
 ?>

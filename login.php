@@ -29,7 +29,7 @@ if(isset($_GET['status']) && $_GET['status'] == "gagal") {
             header("location:home.php");
         }
         else{
-            header("location:index.php?status=gagal");
+            header("location:login.php?status=gagal");
         }
             
 

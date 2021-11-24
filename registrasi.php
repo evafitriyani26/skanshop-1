@@ -1,12 +1,5 @@
 <?php
- //koneksi Database
- $server= "localhost";
- $user= "root";
- $pass= "";
- $database= "skanshop";
-
- $koneksi= mysqli_connect($server, $user, $pass, $database)or die(mysqli_error($koneksi));
-
+ include("koneksi.php");
  
  //jika tombol simpan di klik
 //print_r($_POST);exit
@@ -139,6 +132,6 @@ if(isset($_POST['bsimpan']))
   </div>
    <div class="text-center mt-3">Saya menyetujui Kebijakan Privasi Syarat & Ketentuan yang berlaku</div>
    <div class="text-center mb-5">
-   <a href="index.php">Back to Login</a>
+   <a href="login.php">Back to Login</a>
    </div>
 </html>

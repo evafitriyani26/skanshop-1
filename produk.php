@@ -1,12 +1,6 @@
 <?php
 
- //koneksi Database
- $server= "localhost";
- $userDB= "root";
- $pass= "";
- $database= "skanshop";
-
- $koneksi= mysqli_connect($server, $userDB, $pass, $database)or die(mysqli_error($koneksi));
+include("koneksi.php");
 session_start();
 if(isset($_SESSION['user'])) {
   $user = $_SESSION['user'];

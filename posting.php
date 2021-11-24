@@ -1,11 +1,5 @@
 <?php
-    //koneksi Database
-    $server= "localhost";
-    $userdb= "root";
-    $pass= "";
-    $database= "skanshop";
-
-    $koneksi= mysqli_connect($server, $userdb, $pass, $database)or die(mysqli_error($koneksi));
+  include("koneksi.php");
     session_start();
     if(empty($_SESSION['user'])) {
       header("location: index.php?status=gagal");
@@ -71,7 +65,7 @@ if(isset($_POST['bsimpan']))
     if($simpan)//Jika simpan suksess
     {
     echo "<script>
-    alert('Simpan data suksess!');
+    alert('posting anda suksess!');
     document.location='home.php';
     </script>";
     }
