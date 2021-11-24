@@ -1,11 +1,7 @@
 <?php
- //koneksi Database
- $server= "localhost";
- $user= "root";
- $pass= "";
- $database= "skanshop";
 
- $koneksi= mysqli_connect($server, $user, $pass, $database)or die(mysqli_error($koneksi));
+include 'koneksi.php';
+
 
  session_start();
  if(empty($_SESSION['user'])){
@@ -22,7 +18,7 @@ if(isset($_POST['bsimpan']))
           $lokasifoto='image/';
           $namafoto = "";
           if(isset($_FILES['tfoto']['name'])) {
-          $namafoto=@$_FILES['tfoto']['name'];
+          $namafoto=$user['id'].date("YmdHis").$_FILES['tfoto']['name'];
           move_uploaded_file($_FILES['tfoto']['tmp_name'],$lokasifoto.$namafoto);
           }
             //Data akan di edit
@@ -85,7 +81,7 @@ if(isset($_POST['bsimpan']))
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="profil.css">
+    <link rel="stylesheet" type="text/css" href="css/profil.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -104,7 +100,7 @@ if(isset($_POST['bsimpan']))
             <a href="home.php"><i class="bi bi-arrow-left mt-3"></i></a>
           </div>
       <form method= "post" enctype="multipart/form-data">
-          <div class="text-center"><img width="100" heigth="100" src="<?php if(is_file("image/".$vfoto)) { echo "image/".$vfoto; } else { ?>user 1.png<?php } ?>" alt=""></div>
+          <div class="text-center"><img width="100%" src="<?php if(is_file("image/".$vfoto)) { echo "image/".$vfoto; } else { ?>image/user 1.png<?php } ?>" alt=""></div>
           <div class="text-center mt-3 mb-3">
           <input type="file" name="tfoto">
           <label for="floatingInput"></label>
