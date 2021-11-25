@@ -6,11 +6,7 @@
     position: center;
 }
 #satu{
-    width: 360px;
-    height: 360px;
     padding: 5px ;
-    background-color: rgb(219, 219, 219);
-    margin-top: 50px;
 }
 #colom{
     padding: 10px ;
