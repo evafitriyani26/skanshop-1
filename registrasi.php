@@ -1,5 +1,8 @@
 <?php
  include("koneksi.php");
+
+
+
  
  //jika tombol simpan di klik
 //print_r($_POST);exit
@@ -101,12 +104,12 @@ if(isset($_POST['bsimpan']))
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
     <title>skanshop</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
     <!-- awal card form -->
     
-  <div class="text-center"><img src="user 1.png" alt=""></div>
+  <div class="text-center"><img src="image/user 1.png" alt=""></div>
   <div class="container">
   <h2 class="text-center">Registrasi</h2>
         <div class="">

@@ -1,42 +1,49 @@
 <?php
 
 include("koneksi.php");
+
 session_start();
-if(isset($_SESSION['user'])) {
-  $user = $_SESSION['user'];
-}else{
-  $user = array();
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+} else {
+    $user = array();
 }
 
-if(isset($_GET['id']) && $_GET['id']) {
-  $idproduct = $_GET['id'];
+if (isset($_GET['id']) && $_GET['id']) {
+    $idproduct = $_GET['id'];
 } else {
-  echo "ID produk belum dipilih";
-  exit;
+    echo "ID produk belum dipilih";
+    exit;
 }
- 
-$sql =" SELECT *,
+
+$sql = " SELECT *,
 (select wa from user where id=id_user) as 'wa',
 (select fb from user where id=id_user) as 'fb',
 (select ig from user where id=id_user) as 'ig',
-(select nama from user where id=id_user) as 'nama_user' FROM produk WHERE id='".(int)$idproduct."' "; 
+(select nama from user where id=id_user) as 'nama_user' FROM produk WHERE id='" . (int) $idproduct . "' ";
 $result = $koneksi->query($sql);
-$produk =  $result->fetch_assoc();
+$produk = $result->fetch_assoc();
 
-
-
-if(@$_GET['hal']== "hapus")
-{
+if (@$_GET['hal'] == "hapus") {
 //persiapan hapus data
-$hapus = mysqli_query($koneksi, "DELETE FROM produk WHERE id='".(int)$_GET[id]."' ");
-if($hapus){
-    echo "<script>
-        alert('Hapus Data Sukses!!');
-        document.location='home.php';
-  </script>";
-
-  }
+    $hapus = mysqli_query($koneksi, "DELETE FROM produk WHERE id='" . (int) $_GET['id'] . "' ");
+    if ($hapus) {
+        echo "<script>alert('Hapus Data Sukses!!');document.location='home.php';</script>";
+    }
 }
+
+
+$sql =" SELECT * FROM produk WHERE id_user='$produk[id_user]' order by id desc LIMIT 0,18 ";
+$result = $koneksi->query($sql);
+$produks = array();
+ if($koneksi->query($sql)) { 
+   while($row = $result->fetch_assoc()) {
+     $produks[] = $row;
+   }
+ } else {
+   echo "Query error";
+   exit;
+ }
 
 ?>
 
@@ -45,7 +52,7 @@ if($hapus){
   <head>
     <style>
       body {width: 100%; background: linear-gradient(180deg, #6AC9C9 0%, #43E7FE 100%);}
-      
+
     </style>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -53,7 +60,7 @@ if($hapus){
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="produk.css">
+    <link rel="stylesheet" type="text/css" href="css/produk.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -65,27 +72,27 @@ if($hapus){
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          
+
         </div>
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
         <div class="col-12 text-center">
-          <img src="<?php echo "produk/".$produk['foto']; ?>" width="100%">
+          <img src="<?php echo "produk/" . $produk['foto']; ?>" width="100%">
         </div>
-      
+
           </div>
         </div>
-      </div><?php if(isset($user['id']) && $produk['id_user']==$user['id']) {?> 
+      </div><?php if (isset($user['id']) && $produk['id_user'] == $user['id']) {?>
       <p><a href="posting.php?id=<?php echo $produk['id']; ?>" class="btn btn-success">Edit</a>
-      <a href="produk.php?hal=hapus&id=<?=$produk['id']?>" 
+      <a href="produk.php?hal=hapus&id=<?=$produk['id']?>"
    onclick="return confirm('apakah yakin ingin menghapus data ini?')" class="btn btn-danger float-end">Hapus</a></p>
-      <?php } ?>
+      <?php }?>
    <td>
    </tr>
       <div class="card text-center " style="width: 22">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item "><b><?php echo $produk['nama_produk']; ?></b></li> 
+          <li class="list-group-item "><b><?php echo $produk['nama_produk']; ?></b></li>
           <li class="list-group-item" ><?php echo $produk['harga_produk']; ?></li>
         </ul>
       </div>
@@ -98,26 +105,21 @@ if($hapus){
         <p class="lead">
         <?php echo $produk['deskripsi']; ?>
           </p>
-        
+
             </div>
           </div>
           <div id="produk" class="container">
     <h6 class="text-ligh mt-4" >Produk Lainya</h6>
   <div class="card-body">
-    <div class="row">
-      <div class="col-4 text-center">
-        <a href="produk.php?id=<?php echo $produk['id']; ?>"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
-        <p style="font-size: 8px;"><?php echo $produk['nama_produk']; ?></p></a>
-      </div>
-      <div class="col-4 text-center">
-        <a href="produk.php?id=<?php echo $produk['id']; ?>"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
-        <p style="font-size: 8px;"><?php echo $produk['nama_produk']; ?></p></a>
-      </div>
-       <div class="col-4 text-center">
-        <a href="produk.php"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
-        <p style="font-size: 8px;"><?php echo $produk['nama_produk']; ?></p></a>
-      </div>
+      <div class="row">
+
+      <?php foreach($produks as $produk) { ?>
+        <div class="col-4 text-center">
+          <a href="produk.php?id=<?php echo $produk['id']; ?>"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
+          <p style="font-size: 15px;"><?php echo $produk['nama_produk']; ?></p></a>
         </div>
+        <?Php } ?>
+      </div>
    </div>
    </div>
     </div>
@@ -130,8 +132,8 @@ if($hapus){
       </div>
       </div>
     </div>
-  
-    
+
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

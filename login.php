@@ -1,6 +1,8 @@
 <?php
 
 // Declarasi
+    include 'koneksi.php';
+
 
 session_start();
 	if(isset($_SESSION['user'])){
@@ -12,8 +14,6 @@ if(isset($_GET['status']) && $_GET['status'] == "gagal") {
 }
 
 //untuk penghubung dengan file koneksi
-    include 'koneksi.php';
-
     if(isset($_POST['input'])){
         $email = $_POST['email'];
         $password= $_POST['password'];
@@ -49,11 +49,11 @@ if(isset($_GET['status']) && $_GET['status'] == "gagal") {
 
 		<!-- Bootstrap CSS -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<title>login</title>
   </head>
   <body>
-	<div class="text-center"><img src="user 1.png" alt=""></div>
+	<div class="text-center"><img src="image/user 1.png" alt=""></div>
 	<div class="container">
 	<h2 class="text-center">Login</h2>
 	<?php if($notifikasi) { ?>

@@ -7,12 +7,20 @@ if(isset($_SESSION['user'])) {
   $userDB = $_SESSION['user'];
 } 
 $kategori = 0;
-    if (isset($_GET['kategori'])){
-        $kategori = $_GET['kategori'];
+    if (isset($_GET['id_user'])){
+        $produk= $_GET['id_user'];
     }
- $sql =" SELECT * FROM produk WHERE kategori = '$kategori' " ;
- $result = $koneksi->query($sql);
- $produks = array();
+    $sql =" SELECT * FROM produk WHERE id_user='$produk[id_user]' order by id desc LIMIT 0,18 ";
+    $result = $koneksi->query($sql);
+    $produks = array();
+     if($koneksi->query($sql)) { 
+       while($row = $result->fetch_assoc()) {
+         $produks[] = $row;
+       }
+     } else {
+       echo "Query error";
+       exit;
+     }
   if($koneksi->query($sql)) { 
     while($row = $result->fetch_assoc()) {
       $produks[] = $row;
@@ -55,20 +63,21 @@ $kategori = 0;
       </form>
     </div>
     <div class="container">
-        <h2 class="text-start"><?php echo $_GET['kategori']; ?></h2>
+        <h2 class="text-start"><?php echo $_GET['id_user']; ?></h2>
     </div>
   <!-- As a heading -->
   <div class="container">
     <h6 class="text-Start">List Produk</h6>
     <div class="card-body">
-      <div class="row">
-      <?php foreach($produks as $produk) { ?>
-        <div class="col-4 text-center">
-          <a href="produk.php?id=<?php echo $produk['id']; ?>"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
-          <p style="font-size: 15px;"><?php echo $produk['nama_produk']; ?></p></a>
-        </div>
-        <?Php } ?>
-      </div>
+    <div class="row">
+
+<?php foreach($produks as $produk) { ?>
+  <div class="col-4 text-center">
+    <a href="produk.php?id=<?php echo $produk['id']; ?>"><img src="<?php echo "produk/".$produk['foto']; ?>" width="100">
+    <p style="font-size: 15px;"><?php echo $produk['nama_produk']; ?></p></a>
+  </div>
+  <?Php } ?>
+</div>
       </div>
       </div>
       <div id="kandang" class="container">

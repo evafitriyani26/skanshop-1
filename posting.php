@@ -14,9 +14,9 @@ if(isset($_POST['bsimpan']))
 //pengujian apakah data akan diedit atau disimpan baru  
     $vid2 = $_GET['id'];
     $lokasifoto='produk/';
-    $namafoto = @$_POST['fotosaatini'];
+    $namafoto = "";
     if(isset($_FILES['tfoto']['name']) && $_FILES['tfoto']['name'] ) {
-      $namafoto=@$_FILES['tfoto']['name'];
+      $namafoto=$user['id'].date("YmdHis").$_FILES['tfoto']['name'];
       move_uploaded_file($_FILES['tfoto']['tmp_name'],$lokasifoto.$namafoto);
     }
     //jika edit
@@ -52,7 +52,8 @@ if(isset($_POST['bsimpan']))
     }
     else{
     
-    $simpan = mysqli_query($koneksi, "INSERT INTO produk (`foto`,`nama_produk`,`harga_produk`,`kategori`,`deskripsi`,`id_user`)
+    $simpan = mysqli_query($koneksi, "INSERT 
+    INTO produk (`foto`,`nama_produk`,`harga_produk`,`kategori`,`deskripsi`,`id_user`)
     VALUES ('$namafoto',
            '$_POST[nama_produk]',
            '$_POST[harga_produk]',
