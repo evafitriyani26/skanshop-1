@@ -13,20 +13,24 @@ include("koneksi.php");
     $namafoto = "";
     if(isset($_FILES['tfoto']['name'])) {
       $namafoto=@$_FILES['tfoto']['name'];
+        $cekshell = explode('.', $_FILES["file"]["name"]);
+        if (!in_array(pathinfo($_FILES['file']['name'],PATHINFO_EXTENSION), $alow_type_file)) {  
+            echo "Type file tidak di izinkan";
+            exit;
+        }
       move_uploaded_file($_FILES['tfoto']['tmp_name'],$lokasifoto.$namafoto);
     }
        
             
                 $simpan = mysqli_query($koneksi, "INSERT INTO produk 
                 (`foto`,`nama_produk`,`harga_produk`,`kategori`,`deskripsi`, `id_user`)
-                                          VALUES ('$namafoto',
-                                                 '$_POST[nama_produk]',
-                                                 '$_POST[harga_produk]',
-                                                 '$_POST[kategori]',
-                                                 '$_POST[deskripsi]',
-                                                 '$user[id]'
-                                                 )
-                                         ");
+                                          VALUES ('".FormSet($namafoto)."',
+                                                 '".FormSet($_POST['nama_produk'])."',
+                                                 '".FormSet($_POST['harga_produk'])."',
+                                                 '".FormSet($_POST['kategori'])."',
+                                                 '".FormSet($_POST['deskripsi'])."',
+                                                 '".(int)$user['id']."'
+                                                 )");
 
                                          
                     if($simpan)//Jika simpan suksess

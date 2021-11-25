@@ -5,7 +5,7 @@ include 'koneksi.php';
 
  session_start();
  if(empty($_SESSION['user'])){
-   header("location: index.php?status=gagal");
+   header("location: login.php?status=gagal");
  }else{
    $user = $_SESSION['user'];
  }
@@ -19,21 +19,26 @@ if(isset($_POST['bsimpan']))
           $namafoto = "";
           if(isset($_FILES['tfoto']['name'])) {
           $namafoto=$user['id'].date("YmdHis").$_FILES['tfoto']['name'];
+          $cekshell = explode('.', $_FILES["file"]["name"]);
+          if (!in_array(pathinfo($_FILES['file']['name'],PATHINFO_EXTENSION), $alow_type_file)) {  
+              echo "Type file tidak di izinkan";
+              exit;
+          }
           move_uploaded_file($_FILES['tfoto']['tmp_name'],$lokasifoto.$namafoto);
           }
             //Data akan di edit
                 //data akan disimpan baru
                 $edit = mysqli_query($koneksi, "UPDATE user set
-                `foto`='".$namafoto."',
-                `nama`='".$_POST['tnama']."',
-                `jenis_kelamin`='".$_POST['tjenis_kelamin']."',
-                `tanggal_lahir`='".$_POST['ttanggal_lahir']."',
-                `alamat`='".$_POST['talamat']."',
-                `email`='".$_POST['temail']."',
-                `wa`= '".$_POST['twa']."',
-                `fb`='".$_POST['tfb']."',
-                `ig`='".$_POST['tig']."'
-                WHERE id='".$vid."'
+                `foto`='".FormSet($namafoto)."',
+                `nama`='".FormSet($_POST['tnama'])."',
+                `jenis_kelamin`='".FormSet($_POST['tjenis_kelamin'])."',
+                `tanggal_lahir`='".FormSet($_POST['ttanggal_lahir'])."',
+                `alamat`='".FormSet($_POST['talamat'])."',
+                `email`='".FormSet($_POST['temail'])."',
+                `wa`= '".FormSet($_POST['twa'])."',
+                `fb`='".FormSet($_POST['tfb'])."',
+                `ig`='".FormSet($_POST['tig'])."'
+                WHERE id='".(int)$vid."'
                 ");
                 
                 if($edit) //jika edit sukses
@@ -51,7 +56,7 @@ if(isset($_POST['bsimpan']))
 
 }
       //Tampilkan data yang diedit
-        $tampil = mysqli_query($koneksi, "SELECT * FROM user WHERE id = '$user[id]' ");
+        $tampil = mysqli_query($koneksi, "SELECT * FROM user WHERE id = '".(int)$user['id']."' ");
         $data = mysqli_fetch_array($tampil);
           if($data)
           {
