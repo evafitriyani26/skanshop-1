@@ -11,26 +11,37 @@ if (isset($_SESSION['user'])) {
 
 if (isset($_GET['id']) && $_GET['id']) {
     $idproduct = $_GET['id'];
-} else {
-    echo "ID produk belum dipilih";
-    exit;
 }
+$vid= $user['id'];
+          $lokasifoto='image/';
+          $namafoto = "";
+          if(isset($_FILES['tfoto']['name'])) {
+          $namafoto=$user['id'].date("YmdHis").$_FILES['tfoto']['name'];
+          move_uploaded_file($_FILES['tfoto']['tmp_name'],$lokasifoto.$namafoto);
+          }
 
 $sql = " SELECT *,
 (select wa from user where id=id_user) as 'wa',
 (select fb from user where id=id_user) as 'fb',
 (select ig from user where id=id_user) as 'ig',
-(select nama from user where id=id_user) as 'nama_user' FROM produk WHERE id='" . (int) $idproduct . "' ";
+(select nama from user where id=id_user) as 'nama_user' FROM produk ";
 $result = $koneksi->query($sql);
 $produk = $result->fetch_assoc();
 
-if (@$_GET['hal'] == "hapus") {
-//persiapan hapus data
-    $hapus = mysqli_query($koneksi, "DELETE FROM produk WHERE id='" . (int) $_GET['id'] . "' ");
-    if ($hapus) {
-        echo "<script>alert('Hapus Data Sukses!!');document.location='home.php';</script>";
-    }
-}
+$tampil = mysqli_query($koneksi, "SELECT * FROM user WHERE id = '$user[id]' ");
+        $data = mysqli_fetch_array($tampil);
+          if($data)
+          {
+             //Jika data ditemukan, maka data ditampung ke dalam variabel
+            $vfoto = $data['foto'];
+            $vnama = $data['nama'];
+            $valamat = $data['alamat'];
+            $vemail = $data['email'];           
+            $vwa = $data['wa'];
+            $vfb = $data['fb'];
+            $vig = $data['ig'];
+                
+          }
 
 
 $sql =" SELECT * FROM produk WHERE id_user='$produk[id_user]' order by id desc LIMIT 0,18 ";
@@ -60,7 +71,7 @@ $produks = array();
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/produk.css">
+    <link rel="stylesheet" type="text/css" href="css/home.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -68,48 +79,20 @@ $produks = array();
     <div id="head" class="container"><a id="arrow" href="home.php" class="btn btn" role="button"><i class="bi bi-arrow-left"></i><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"></i></a></div>
   </head>
   <body>
-    <div class="container">
-      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-
-        </div>
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-        <div class="col-12 text-center">
-          <img src="<?php echo "produk/" . $produk['foto']; ?>" width="100%">
-        </div>
-
+      <div class="container">
+      <form method= "post" enctype="multipart/form-data">
+          <div class="text-center"><img width="75%" src="<?php if(is_file("image/".$vfoto)) { echo "image/".$vfoto; } else { ?>image/user 1.png<?php } ?>" class="rounded-circle" alt=""></div>
+          <div class="text-center mt-3 mb-3">
+          <label for="floatingInput"></label>
           </div>
-        </div>
-      </div><?php if (isset($user['id']) && $produk['id_user'] == $user['id']) {?>
-      <p><a href="posting.php?id=<?php echo $produk['id']; ?>" class="btn btn-success">Edit</a>
-      <a href="produk.php?hal=hapus&id=<?=$produk['id']?>"
-   onclick="return confirm('apakah yakin ingin menghapus data ini?')" class="btn btn-danger float-end">Hapus</a></p>
-      <?php }?>
-   <td>
-   </tr>
-      <div class="card text-center " style="width: 22">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item "><b><?php echo $produk['nama_produk']; ?></b></li>
-          <li class="list-group-item" ><?php echo $produk['harga_produk']; ?></li>
-        </ul>
+          <div class="form-floating mb-3">
+            <li class="list-group-item "><b><?php echo $user['nama']; ?></b></li>
+          </div>
       </div>
-    </div>
-    <a href="toko.php"><h4 class="text-start mt-2"><?php echo $produk['nama_user']; ?></h4></a>
-    <div id="satu" class="container"><div class="text-start">
-      <p class="fw-bold">
-        Deskripsi Item
-        </p>
-        <p class="lead">
-        <?php echo $produk['deskripsi']; ?>
-          </p>
+  
 
-            </div>
-          </div>
           <div id="produk" class="container">
-    <h6 class="text-ligh mt-4" >Produk Lainya</h6>
+    <h6 class="text-ligh mt-4" >Produk </h6>
   <div class="card-body">
       <div class="row">
 

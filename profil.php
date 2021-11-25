@@ -100,7 +100,7 @@ if(isset($_POST['bsimpan']))
             <a href="home.php"><i class="bi bi-arrow-left mt-3"></i></a>
           </div>
       <form method= "post" enctype="multipart/form-data">
-          <div class="text-center"><img width="100%" src="<?php if(is_file("image/".$vfoto)) { echo "image/".$vfoto; } else { ?>image/user 1.png<?php } ?>" alt=""></div>
+          <div class="text-center"><img width="75%" src="<?php if(is_file("image/".$vfoto)) { echo "image/".$vfoto; } else { ?>image/user 1.png<?php } ?>" class="rounded-circle" alt=""></div>
           <div class="text-center mt-3 mb-3">
           <input type="file" name="tfoto">
           <label for="floatingInput"></label>
