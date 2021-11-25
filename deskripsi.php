@@ -19,14 +19,13 @@ include("koneksi.php");
             
                 $simpan = mysqli_query($koneksi, "INSERT INTO produk 
                 (`foto`,`nama_produk`,`harga_produk`,`kategori`,`deskripsi`, `id_user`)
-                                          VALUES ('$namafoto',
-                                                 '$_POST[nama_produk]',
-                                                 '$_POST[harga_produk]',
-                                                 '$_POST[kategori]',
-                                                 '$_POST[deskripsi]',
-                                                 '$user[id]'
-                                                 )
-                                         ");
+                                          VALUES ('".FormSet($namafoto)."',
+                                                 '".FormSet($_POST['nama_produk'])."',
+                                                 '".FormSet($_POST['harga_produk'])."',
+                                                 '".FormSet($_POST['kategori'])."',
+                                                 '".FormSet($_POST['deskripsi'])."',
+                                                 '".(int)$user['id']."'
+                                                 )");
 
                                          
                     if($simpan)//Jika simpan suksess

@@ -33,7 +33,7 @@ if (@$_GET['hal'] == "hapus") {
 }
 
 
-$sql =" SELECT * FROM produk WHERE id_user='$produk[id_user]' order by id desc LIMIT 0,18 ";
+$sql =" SELECT * FROM produk WHERE id_user='".(int)$produk['id_user']."' order by id desc LIMIT 0,18 ";
 $result = $koneksi->query($sql);
 $produks = array();
  if($koneksi->query($sql)) { 

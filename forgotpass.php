@@ -13,9 +13,9 @@ if(isset($_POST['bsimpan']))
             //Data akan di edit
                 //data akan disimpan baru
                 $edit = mysqli_query($koneksi, "UPDATE user set
-                `password`= '".$_POST['tpassword']."',
-                `cpassword`='".$_POST['tcpassword']."'
-                WHERE id='".$_GET['id']."'
+                `password`= '".FormSet($_POST['tpassword'])."',
+                `cpassword`='".FormSet($_POST['tcpassword'])."'
+                WHERE id='".(int)$_GET['id']."'
                 ");
                 
                 if($edit) //jika edit sukses
@@ -33,8 +33,8 @@ if(isset($_POST['bsimpan']))
                 }
         } else {
             $simpan = mysqli_query($koneksi, "INSERT INTO user (`password`,`cpassword`)
-                                          VALUES ('$_POST[tpassword]',
-                                                  '$_POST[tcpassword]')
+                                          VALUES ('".FormSet($_POST['tpassword'])."',
+                                                  '".FormSet($_POST['tcpassword'])."')
                                          ");
 
                                          

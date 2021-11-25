@@ -15,8 +15,8 @@ if(isset($_GET['status']) && $_GET['status'] == "gagal") {
 
 //untuk penghubung dengan file koneksi
     if(isset($_POST['input'])){
-        $email = $_POST['email'];
-        $password= $_POST['password'];
+        $email = FormSet($_POST['email']);
+        $password= FormSet($_POST['password']);
 
         //ambil data dari database tabel login dengan username dan password yang sesuai
         $data = mysqli_query($koneksi, "SELECT * FROM user WHERE email = '$email' AND password = '$password' ");
