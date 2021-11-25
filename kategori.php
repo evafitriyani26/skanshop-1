@@ -6,9 +6,9 @@ $userDB = array();
 if(isset($_SESSION['user'])) {
   $userDB = $_SESSION['user'];
 } 
-$kategori = 0;
-    if (isset($_GET['kategori'])){
-        $kategori = $_GET['kategori'];
+$kategori = "";
+    if (isset($_GET['kategori']) && $_GET['kategori']){
+        $kategori = FormSet($_GET['kategori']);
     }
  $sql =" SELECT * FROM produk WHERE kategori = '$kategori' " ;
  $result = $koneksi->query($sql);

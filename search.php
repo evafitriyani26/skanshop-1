@@ -9,9 +9,9 @@ if(isset($_SESSION['user'])) {
   $user = $_SESSION['user'];
 } 
 if(isset($_GET['nama_produk']) && $_GET['nama_produk'] ) {
-    $nama_produk= $_GET['nama_produk'];
+    $nama_produk = FormSet($_GET['nama_produk']);
 
-}else{
+} else {
     $nama_produk="";
 }
  $sql =" SELECT * FROM produk WHERE nama_produk LIKE '%$nama_produk%' ";

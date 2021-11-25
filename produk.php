@@ -16,6 +16,7 @@ if (isset($_GET['id']) && $_GET['id']) {
     exit;
 }
 
+
 $sql = " SELECT *,
 (select wa from user where id=id_user) as 'wa',
 (select fb from user where id=id_user) as 'fb',

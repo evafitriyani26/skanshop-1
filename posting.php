@@ -24,12 +24,12 @@ if(isset($_POST['bsimpan']))
     {
      //data akan diedit
      $edit= mysqli_query($koneksi, "UPDATE produk set
-                `foto` ='".$namafoto."',
-                `nama_produk`='".$_POST['nama_produk']."',
-                `harga_produk`='".$_POST['harga_produk']."',
-                `kategori`='".$_POST['kategori']."',
-                `deskripsi`='".$_POST['deskripsi']."'
-                 WHERE id='".$vid2."' AND id_user='$user[id]'
+                `foto` ='".FormSet($namafoto)."',
+                `nama_produk`='".FormSet($_POST['nama_produk'])."',
+                `harga_produk`='".FormSet($_POST['harga_produk'])."',
+                `kategori`='".FormSet($_POST['kategori'])."',
+                `deskripsi`='".FormSet($_POST['deskripsi'])."'
+                 WHERE id='".(int)$vid2."' AND id_user='".(int)$user['id']."'
                 
      ");
 
@@ -54,14 +54,13 @@ if(isset($_POST['bsimpan']))
     
     $simpan = mysqli_query($koneksi, "INSERT 
     INTO produk (`foto`,`nama_produk`,`harga_produk`,`kategori`,`deskripsi`,`id_user`)
-    VALUES ('$namafoto',
-           '$_POST[nama_produk]',
-           '$_POST[harga_produk]',
-           '$_POST[kategori]',
-           '$_POST[deskripsi]',
-           '$user[id]'
-           )
-   ");
+    VALUES ('".FormSet($namafoto)."',
+           '".FormSet($_POST['nama_produk'])."',
+           '".FormSet($_POST['harga_produk'])."',
+           '".FormSet($_POST['kategori'])."',
+           '".FormSet($_POST['deskripsi'])."',
+           '".(int)$user['id']."'
+           )");
     }
     if($simpan)//Jika simpan suksess
     {
@@ -85,7 +84,7 @@ if(isset($_POST['bsimpan']))
             if ($_GET['hal'] == "hapus")
             {
                 //Persiapan hapus data
-                $hapus = mysqli_query($koneksi, "DELETE FROM produk WHERE id = '$_GET[id]'  AND id_user='$user[id]' ");
+                $hapus = mysqli_query($koneksi, "DELETE FROM produk WHERE id = '".(int)$_GET['id']."'  AND id_user='".(int)$user['id']."' ");
                 if($hapus){
                     echo "<script>
                         alert('Hapus Data Suksess!!');
@@ -102,7 +101,7 @@ if(isset($_POST['bsimpan']))
     }
 
     //tampilkan data yang akan diedit
-    $tampil = mysqli_query($koneksi, "SELECT * FROM produk WHERE id = '$vid' ");
+    $tampil = mysqli_query($koneksi, "SELECT * FROM produk WHERE id = '".(int)$vid."' ");
     $data = mysqli_fetch_array($tampil); 
     if($data)
     {
