@@ -8,27 +8,13 @@ if (isset($_SESSION['user'])) {
 } else {
     $user = array();
 }
-
+$iduser= 0;
 if (isset($_GET['id']) && $_GET['id']) {
-    $idproduct = $_GET['id'];
+    $iduser = (int)$_GET['id'];
 }
-$vid= $user['id'];
-          $lokasifoto='image/';
-          $namafoto = "";
-          if(isset($_FILES['tfoto']['name'])) {
-          $namafoto=$user['id'].date("YmdHis").$_FILES['tfoto']['name'];
-          move_uploaded_file($_FILES['tfoto']['tmp_name'],$lokasifoto.$namafoto);
-          }
 
-$sql = " SELECT *,
-(select wa from user where id=id_user) as 'wa',
-(select fb from user where id=id_user) as 'fb',
-(select ig from user where id=id_user) as 'ig',
-(select nama from user where id=id_user) as 'nama_user' FROM produk ";
-$result = $koneksi->query($sql);
-$produk = $result->fetch_assoc();
 
-$tampil = mysqli_query($koneksi, "SELECT * FROM user WHERE id = '$user[id]' ");
+$tampil = mysqli_query($koneksi, "SELECT * FROM user WHERE id = '$iduser' ");
         $data = mysqli_fetch_array($tampil);
           if($data)
           {
@@ -44,7 +30,7 @@ $tampil = mysqli_query($koneksi, "SELECT * FROM user WHERE id = '$user[id]' ");
           }
 
 
-$sql =" SELECT * FROM produk WHERE id_user='$produk[id_user]' order by id desc LIMIT 0,18 ";
+$sql =" SELECT * FROM produk WHERE id_user='$iduser' order by id desc LIMIT 0,18 ";
 $result = $koneksi->query($sql);
 $produks = array();
  if($koneksi->query($sql)) { 
@@ -85,9 +71,10 @@ $produks = array();
           <div class="text-center mt-3 mb-3">
           <label for="floatingInput"></label>
           </div>
-          <div class="form-floating mb-3">
-            <li class="list-group-item "><b><?php echo $user['nama']; ?></b></li>
-          </div>
+          <ul class="list-group">
+            <li class="list-group-item "><b><?php echo $vnama; ?></b></li>
+            <li class="list-group-item "><b><?php echo $valamat; ?></b></li>
+</ul>
       </div>
   
 

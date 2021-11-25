@@ -19,8 +19,8 @@ if(isset($_POST['bsimpan']))
           $namafoto = "";
           if(isset($_FILES['tfoto']['name'])) {
           $namafoto=$user['id'].date("YmdHis").$_FILES['tfoto']['name'];
-          $cekshell = explode('.', $_FILES["file"]["name"]);
-          if (!in_array(pathinfo($_FILES['file']['name'],PATHINFO_EXTENSION), $alow_type_file)) {  
+          $cekshell = explode('.', $_FILES["tfoto"]["name"]);
+          if (!in_array(pathinfo($_FILES['tfoto']['name'],PATHINFO_EXTENSION), $alow_type_file)) {  
               echo "Type file tidak di izinkan";
               exit;
           }

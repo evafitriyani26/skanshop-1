@@ -81,14 +81,10 @@ $produks = array();
           <li class="list-group-item" ><?php echo $produk['harga_produk']; ?></li>
         </ul>
       </div>
-<<<<<<< HEAD
     </div>
-    <a href="toko.php"><h4 class="text-start mt-2"><?php echo $produk['nama_user']; ?></h4></a>
+    
     <div id="satu" class="container"><div class="text-start">
-=======
-    <h4 class="text-start mt-2"><?php echo $produk['nama_user']; ?></h4>
-    <div id="satu"><div class="text-start">
->>>>>>> 1fdb111043dbd96501a935d6250fec13cf393e06
+    <a href="toko.php?id=<?php echo $produk['id_user']; ?>"><h4 class="text-start mt-2"><?php echo $produk['nama_user']; ?></h4></a>
       <p class="fw-bold">
         Deskripsi Item
         </p>
