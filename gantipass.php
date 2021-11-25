@@ -15,7 +15,7 @@ $email = @$_POST['email'];
 
 if(@$_POST['pass_lama']){
       //uji jika password lama sesuai
-      $sql = "SELECT * FROM user WHERE id = '$iduser' and password = '$_POST[pass_lama]' ";
+      $sql = "SELECT * FROM user WHERE id = '".(int)$iduser."' and password = '".FormSet($_POST['pass_lama'])."' ";
       $tampil = mysqli_query($koneksi, $sql);
       $data = mysqli_fetch_array($tampil);
       
@@ -36,8 +36,8 @@ if(@$_POST['pass_lama']){
     //Proses ganti password
     //enkripsi password baru
     $pass_ok = $konfirmasi;
-    $sql2 = "UPDATE user set password = '".$pass_ok."', cpassword='".$pass_ok."' 
-    WHERE id = '$data[id]' ";
+    $sql2 = "UPDATE user set password = '".FormSet($pass_ok)."', cpassword='".FormSet($pass_ok)."' 
+    WHERE id = '".(int)$data['id']."' ";
     $ubah = mysqli_query($koneksi, $sql2);
     if($ubah){
       echo "<script>

@@ -13,11 +13,11 @@ if(isset($_POST['bsimpan']))
             //Data akan di edit
                 //data akan disimpan baru
                 $edit = mysqli_query($koneksi, "UPDATE user set
-                `nama`='".$_POST['tnama']."',
-                `email`='".$_POST['temail']."',
-                `password`= '".$_POST['tpassword']."',
-                `cpassword`='".$_POST['tcpassword']."'
-                WHERE id='".$_GET['id']."'
+                `nama`='".FormSet($_POST['tnama'])."',
+                `email`='".FormSet($_POST['temail'])."',
+                `password`= '".FormSet($_POST['tpassword'])."',
+                `cpassword`='".FormSet($_POST['tcpassword'])."'
+                WHERE id='".(int)$_GET['id']."'
                 ");
                 
                 if($edit) //jika edit sukses
@@ -35,10 +35,10 @@ if(isset($_POST['bsimpan']))
                 }
         } else {
             $simpan = mysqli_query($koneksi, "INSERT INTO user (`nama`,`email`,`password`,`cpassword`)
-                                          VALUES ('$_POST[tnama]',
-                                                 '$_POST[temail]',
-                                                 '$_POST[tpassword]',
-                                                 '$_POST[tcpassword]')
+                                          VALUES ('".FormSet($_POST['tnama'])."',
+                                                 '".FormSet($_POST['temail'])."',
+                                                 '".FormSet($_POST['tpassword'])."',
+                                                 '".FormSet($_POST['tcpassword'])."')
                                          ");
 
                                          
@@ -67,7 +67,7 @@ if(isset($_POST['bsimpan']))
         if($_GET['hal'] == "edit")
         {
             //Tampilkan data yang diedit
-            $tampil = mysqli_query($koneksi, "SELECT * FROM user WHERE id = '$_GET[id]' ");
+            $tampil = mysqli_query($koneksi, "SELECT * FROM user WHERE id = '".(int)$_GET['id']."' ");
             $data = mysqli_fetch_array($tampil);
             if($data)
             {
@@ -80,7 +80,7 @@ if(isset($_POST['bsimpan']))
         } else if ($_GET['hal'] == "hapus")
         {
             //Persiapan hapus data
-            $hapus = mysqli_query($koneksi, "DELETE FROM user WHERE id = '$_GET[id]' ");
+            $hapus = mysqli_query($koneksi, "DELETE FROM user WHERE id = '".(int)$_GET['id']."' ");
             if($hapus){
                 echo "<script>
                     alert('Hapus Data Suksess!!');
