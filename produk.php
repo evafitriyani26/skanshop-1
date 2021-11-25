@@ -69,28 +69,13 @@ $produks = array();
     <div id="head" class="container"><a id="arrow" href="home.php" class="btn btn" role="button"><i class="bi bi-arrow-left"></i><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"></i></a></div>
   </head>
   <body>
-    <div class="container">
-      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-
-        </div>
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-        <div class="col-12 text-center">
-          <img src="<?php echo "produk/" . $produk['foto']; ?>" width="100%">
-        </div>
-
-          </div>
-        </div>
-      </div><?php if (isset($user['id']) && $produk['id_user'] == $user['id']) {?>
+    <div class="container"> 
+      <img src="<?php echo "produk/" . $produk['foto']; ?>" width="100%">
+      <?php if (isset($user['id']) && $produk['id_user'] == $user['id']) {?>
       <p><a href="posting.php?id=<?php echo $produk['id']; ?>" class="btn btn-success">Edit</a>
       <a href="produk.php?hal=hapus&id=<?=$produk['id']?>"
    onclick="return confirm('apakah yakin ingin menghapus data ini?')" class="btn btn-danger float-end">Hapus</a></p>
-      <?php }?>
-   <td>
-   </tr>
+      <?php }?> 
       <div class="card text-center " style="width: 22">
         <ul class="list-group list-group-flush">
           <li class="list-group-item "><b><?php echo $produk['nama_produk']; ?></b></li>
@@ -98,8 +83,9 @@ $produks = array();
         </ul>
       </div>
     </div>
-    <h4 class="text-start mt-2"><?php echo $produk['nama_user']; ?></h4>
+    
     <div id="satu" class="container"><div class="text-start">
+    <a href="toko.php?id=<?php echo $produk['id_user']; ?>"><h4 class="text-start mt-2"><?php echo $produk['nama_user']; ?></h4></a>
       <p class="fw-bold">
         Deskripsi Item
         </p>
@@ -109,7 +95,7 @@ $produks = array();
 
             </div>
           </div>
-          <div id="produk" class="container">
+    <div id="produk" class="container">
     <h6 class="text-ligh mt-4" >Produk Lainya</h6>
   <div class="card-body">
       <div class="row">

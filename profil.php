@@ -4,7 +4,7 @@
 
  session_start();
  if(empty($_SESSION['user'])){
-   header("location: index.php?status=gagal");
+   header("location: login.php?status=gagal");
  }else{
    $user = $_SESSION['user'];
  }
@@ -18,6 +18,11 @@ if(isset($_POST['bsimpan']))
           $namafoto = "";
           if(isset($_FILES['tfoto']['name'])) {
           $namafoto=$user['id'].date("YmdHis").$_FILES['tfoto']['name'];
+          $cekshell = explode('.', $_FILES["tfoto"]["name"]);
+          if (!in_array(pathinfo($_FILES['tfoto']['name'],PATHINFO_EXTENSION), $alow_type_file)) {  
+              echo "Type file tidak di izinkan";
+              exit;
+          }
           move_uploaded_file($_FILES['tfoto']['tmp_name'],$lokasifoto.$namafoto);
           }
             //Data akan di edit
@@ -99,7 +104,7 @@ if(isset($_POST['bsimpan']))
             <a href="home.php"><i class="bi bi-arrow-left mt-3"></i></a>
           </div>
       <form method= "post" enctype="multipart/form-data">
-          <div class="text-center"><img width="100%" src="<?php if(is_file("image/".$vfoto)) { echo "image/".$vfoto; } else { ?>image/user 1.png<?php } ?>" alt=""></div>
+          <div class="text-center"><img width="75%" src="<?php if(is_file("image/".$vfoto)) { echo "image/".$vfoto; } else { ?>image/user 1.png<?php } ?>" class="rounded-circle" alt=""></div>
           <div class="text-center mt-3 mb-3">
           <input type="file" name="tfoto">
           <label for="floatingInput"></label>

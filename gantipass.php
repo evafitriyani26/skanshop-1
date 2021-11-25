@@ -5,7 +5,7 @@ include 'koneksi.php';
 
 session_start();
 	if(empty($_SESSION['user'])){
-		header("location:home.php");
+		header("location:login.php");
 	}
   $user = $_SESSION['user'][0];
   $iduser = $user;

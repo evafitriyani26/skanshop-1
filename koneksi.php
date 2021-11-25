@@ -7,7 +7,7 @@
  $database= "skanshop";
 
  $koneksi= mysqli_connect($server, $userDB, $pass, $database)or die(mysqli_error($koneksi));
-    
+ $alow_type_file = array("jpg","jpeg","png","JPG","JPEG","PNG");
 function FormSet($nilai)
 {
   $nilai = str_replace("\'","'",$nilai);
