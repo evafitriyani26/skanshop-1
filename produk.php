@@ -94,7 +94,7 @@ $produks = array();
 
             </div>
           </div>
-          <div id="produk">
+    <div id="produk" class="container">
     <h6 class="text-ligh mt-4" >Produk Lainya</h6>
   <div class="card-body">
       <div class="row">
